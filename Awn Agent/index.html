@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Awn Agents | AI Employees for Every Business</title>
+<meta name="description" content="Awn Agents تبني موظفين يعملون بالذكاء الاصطناعي. تتكلم بصوتك أو تكتب بشكل طبيعي، وهو يسمع، يوثق، يرتب، ويطلعلك التقارير. فتحي للمحاسبة، وAwn Care للتوثيق الطبي." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+<link rel="icon" type="image/png" href="assets/awn-mark-black.png" />
+<style>
+/* ============================================================
+   BRAND — Awn Agents
+   Design-token system (colors, type scale, radii, buttons)
+   applied per brief. Logo/mark stays ours — everything else
+   follows the supplied token set.
+============================================================ */
+:root{
+  --ink:        #313337;  /* textPrimary */
+  --ink-strong: #18191B;  /* component text/border */
+  --ink-soft:   #4A4C50;
+  --orange:     #FF3C00;  /* accent / link / buttonPrimary */
+  --orange-dark:#D63500;
+  --orange-light:#FFEAE0;
+  --blue:       #2492FF;  /* primary */
+  --secondary:  #FFB199;  /* focus rings, soft accents */
+  --paper:      #FAF6F1;  /* background */
+  --white:      #FFFFFF;
+  --btn2-bg:    #FAF5F0;  /* buttonSecondary */
+  --grey:       #EBE4DC;
+  --grey-mid:   #9A958E;
+  --grey-text:  #6B6660;
+  --font-ar: 'IBM Plex Sans Arabic', sans-serif;
+  --font-en: 'IBM Plex Sans', sans-serif;
+  --r: 6px; --r-lg: 6px; --r-pill: 90px;
+  --sh: 0 2px 14px rgba(24,25,27,0.05);
+  --sh-md: 0 10px 34px rgba(24,25,27,0.08);
+  --sh-lg: 0 24px 70px rgba(24,25,27,0.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-ar);font-size:16px;line-height:1.7;overflow-x:hidden;}
+body.lang-en{font-family:var(--font-en);direction:ltr;}
+body.lang-ar{font-family:var(--font-ar);direction:rtl;}
+/* Hide-only rules, scoped to the inactive language, so a shown element always
+   falls back to its own component display (block/inline/flex/...) instead of
+   being forced — only ever suppressed when it's the wrong language. */
+body.lang-ar .en-content{display:none !important;}
+body.lang-ar .en-inline{display:none !important;}
+body.lang-en .ar-content{display:none !important;}
+body.lang-en .ar-inline{display:none !important;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+button{font-family:inherit;}
+
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* NAV */
+.navbar{position:sticky;top:0;z-index:200;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:18px 48px;background:rgba(250,250,250,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--grey);
+  direction:ltr;}
+.nav-brand{display:flex;align-items:center;order:1;justify-self:start;}
+.nav-brand .trail-lockup{position:relative;display:inline-block;}
+.nav-brand .trail-lockup img{height:42px;width:auto;display:block;}
+.nav-brand .trail-lockup .trail-text{position:absolute;left:104%;top:70%;
+  font-family:var(--font-en);font-weight:700;font-size:17px;letter-spacing:-0.01em;white-space:nowrap;color:var(--ink-strong);}
+.nav-links{display:flex;align-items:center;gap:4px;font-weight:600;color:var(--ink-soft);order:2;direction:rtl;justify-self:center;}
+.nav-links a{font-size:16px;padding:8px 16px;border-radius:8px;transition:all .15s;}
+.nav-links a:hover{color:var(--orange);background:var(--orange-light);}
+.nav-right{display:flex;align-items:center;gap:14px;order:3;justify-self:end;}
+body.lang-en .nav-links{direction:ltr;}
+.lang-toggle{display:flex;border:1.5px solid var(--grey);border-radius:6px;overflow:hidden;}
+.lang-btn{padding:7px 13px;font-family:var(--font-en);font-size:11px;font-weight:700;border:none;background:transparent;color:var(--grey-mid);cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:.15s;}
+.lang-btn.active{background:var(--ink);color:var(--white);}
+.nav-cta{display:flex;align-items:center;gap:8px;background:var(--btn2-bg);color:var(--ink-strong);border:1.5px solid var(--ink-strong);padding:9px 20px;border-radius:var(--r-pill);font-weight:700;font-size:14px;transition:.2s;}
+.nav-cta:hover{background:var(--orange);border-color:var(--orange);color:var(--white);}
+@media(max-width:900px){.nav-links{display:none;}.navbar{padding:14px 20px;}}
+
+/* ============================================================
+   HERO — Replit-style: centered prompt-first hero
+============================================================ */
+.hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:60px 24px 80px;max-width:900px;margin:0 auto;gap:32px;
+  background:radial-gradient(circle at 50% 0%, rgba(245,79,27,0.07), transparent 55%);}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--orange-light);color:var(--orange-dark);
+  padding:7px 16px;border-radius:99px;font-size:13px;font-weight:700;direction:ltr;}
+body.lang-en .hero-eyebrow{direction:rtl;}
+.hero h1{font-size:clamp(36px,6vw,64px);font-weight:700;line-height:1.15;color:var(--ink);letter-spacing:-0.02em;}
+.hero h1 span{color:var(--orange);}
+.hero-tagline{min-height:52px;display:flex;align-items:center;justify-content:center;}
+.hero-tagline-text{font-size:clamp(17px,2vw,20px);color:var(--grey-text);max-width:640px;transition:opacity .4s ease;}
+
+/* Prompt box */
+.prompt-box{width:100%;max-width:680px;background:var(--white);border:1.5px solid var(--grey);border-radius:22px;
+  box-shadow:var(--sh-md);padding:18px 18px 14px;transition:border-color .2s,box-shadow .2s;}
+.prompt-box:focus-within{border-color:var(--secondary);box-shadow:var(--sh-lg);}
+.prompt-box textarea{width:100%;border:none;outline:none;resize:none;background:transparent;font-family:inherit;
+  font-size:16.5px;color:var(--ink);min-height:26px;max-height:140px;line-height:1.6;}
+.prompt-box textarea::placeholder{color:var(--grey-mid);}
+.prompt-row{display:flex;align-items:center;justify-content:space-between;margin-top:14px;}
+.prompt-modes{display:flex;gap:8px;}
+.mode-chip{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:99px;border:1.5px solid var(--grey);
+  background:var(--white);font-size:13px;font-weight:700;color:var(--ink-soft);cursor:pointer;transition:.18s;}
+.mode-chip:hover{border-color:var(--ink);}
+.mode-chip.active{background:var(--ink-strong);border-color:var(--ink-strong);color:var(--white);}
+.mode-chip.active.mode-care{background:var(--blue);border-color:var(--blue);}
+.prompt-send{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FF6A38,var(--orange) 60%,var(--orange-dark));color:var(--white);border:none;
+  padding:10px 22px;border-radius:var(--r-pill);font-weight:700;font-size:14px;cursor:pointer;transition:.25s;box-shadow:0 6px 18px rgba(245,79,27,0.28);}
+.prompt-send:hover{box-shadow:0 8px 22px rgba(245,79,27,0.4);transform:translateY(-1px);}
+.prompt-send i{font-size:15px;}
+body.lang-en .prompt-send i.ti-arrow-left{transform:scaleX(-1);}
+
+.examples{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.examples-label{font-size:12.5px;font-weight:700;color:var(--grey-mid);text-transform:uppercase;letter-spacing:.06em;}
+.examples-list{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:680px;}
+.example-pill{padding:9px 16px;border-radius:99px;border:1.5px solid var(--grey);background:var(--white);
+  font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.18s;}
+.example-pill:hover{border-color:var(--orange);color:var(--orange-dark);}
+
+@media(max-width:640px){.hero{min-height:auto;padding:48px 20px 60px;gap:24px;}.prompt-box{border-radius:18px;}}
+
+/* SECTION SHARED */
+section{padding:100px 48px;}
+.dashed-top{position:relative;}
+.dashed-top::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:repeating-linear-gradient(90deg,var(--grey) 0,var(--grey) 8px,transparent 8px,transparent 16px);}
+.section-inner{max-width:1180px;margin:0 auto;}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--orange-dark);background:var(--orange-light);border:1px solid var(--grey);padding:8px 20px;border-radius:100px;margin-bottom:18px;}
+.section-title{font-size:clamp(28px,3.4vw,40px);font-weight:800;color:var(--ink);margin-bottom:18px;letter-spacing:-0.01em;}
+.section-sub{font-size:17px;color:var(--grey-text);max-width:680px;}
+@media(max-width:900px){section{padding:64px 22px;}}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.about-grid p{font-size:16.5px;color:var(--grey-text);margin-bottom:18px;}
+.about-grid strong{color:var(--ink);}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:20px;}}
+
+/* VISION / MISSION */
+.vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.vm-card{background:var(--white);border:1px solid var(--grey);border-radius:var(--r-lg);padding:38px;box-shadow:var(--sh);}
+.vm-card i{font-size:26px;color:var(--orange);margin-bottom:18px;display:block;}
+.vm-card .vm-label{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--grey-mid);margin-bottom:10px;}
+.vm-card h3{font-size:21px;font-weight:700;color:var(--ink);margin-bottom:14px;line-height:1.5;}
+.vm-card p{color:var(--grey-text);font-size:15px;}
+@media(max-width:900px){.vm-grid{grid-template-columns:1fr;}}
+
+/* PHILOSOPHY STRIP */
+.philosophy{background:
+    radial-gradient(circle at 15% 20%, rgba(245,79,27,0.16), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(36,146,255,0.10), transparent 45%),
+    linear-gradient(160deg,var(--ink-strong),#000);
+  color:var(--white);text-align:center;position:relative;overflow:hidden;}
+.philosophy .section-inner{max-width:760px;position:relative;z-index:1;}
+.philosophy p{font-size:clamp(24px,3vw,34px);font-weight:700;line-height:1.5;}
+.philosophy .line2{background:linear-gradient(90deg,var(--orange),#FF9466);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+/* PRODUCTS */
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.product-card{background:var(--white);border:1px solid var(--grey);border-radius:var(--r-lg);padding:40px;box-shadow:var(--sh);transition:.25s;display:flex;flex-direction:column;}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(24,25,27,0.14),0 0 0 1px rgba(245,79,27,0.12);}
+.product-mark{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:var(--white);margin-bottom:22px;}
+.mark-fathi{background:linear-gradient(135deg,#0D3D2B,#1A5C3E);}
+.mark-care{background:linear-gradient(135deg,var(--ink),var(--blue));}
+.product-card .p-eyebrow{font-size:12.5px;font-weight:800;color:var(--orange);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+.product-card h3{font-size:24px;font-weight:800;color:var(--ink);margin-bottom:6px;}
+.product-card .tagline{font-size:15px;font-weight:600;color:var(--grey-text);font-style:italic;margin-bottom:18px;}
+.product-card p.desc{font-size:15px;color:var(--grey-text);margin-bottom:28px;flex-grow:1;}
+.product-link{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14.5px;color:var(--ink);margin-top:auto;padding-top:18px;border-top:1px solid var(--grey);}
+.product-link i{transition:.2s;}
+.product-card:hover .product-link{color:var(--orange);}
+.product-card:hover .product-link i{transform:translateX(-4px);}
+body.lang-en .product-card:hover .product-link i{transform:translateX(4px);}
+@media(max-width:900px){.products-grid{grid-template-columns:1fr;}}
+
+/* WHY AWN */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+.why-visual{background:var(--white);border:1px solid var(--grey);border-radius:var(--r-lg);padding:40px;box-shadow:var(--sh);}
+.why-row{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--grey);}
+.why-row:last-child{border-bottom:none;}
+.why-row i{font-size:20px;color:var(--orange);flex-shrink:0;}
+.why-row span{font-size:15px;color:var(--ink-soft);font-weight:600;}
+@media(max-width:900px){.why-grid{grid-template-columns:1fr;gap:28px;}}
+
+/* HOW IT WORKS */
+.steps-row{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;position:relative;}
+.steps-row::before{content:'';position:absolute;top:38px;left:10%;right:10%;height:2px;z-index:0;
+  background:repeating-linear-gradient(90deg,var(--grey) 0,var(--grey) 8px,transparent 8px,transparent 16px);}
+.step{text-align:center;position:relative;z-index:1;}
+.step-num{width:76px;height:76px;border-radius:50%;background:var(--ink);color:var(--white);display:flex;
+  align-items:center;justify-content:center;font-weight:800;font-size:28px;margin:0 auto 18px;font-family:var(--font-en);
+  box-shadow:0 0 0 8px var(--white);position:relative;z-index:1;}
+.step-icon{display:block;font-size:22px;color:var(--orange);margin-bottom:12px;}
+.step h4{font-size:15.5px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.step-desc{font-size:13px;color:var(--grey-text);line-height:1.6;max-width:175px;margin:0 auto;}
+@media(max-width:960px){.steps-row{grid-template-columns:repeat(2,1fr);gap:40px 20px;}.steps-row::before{display:none;}}
+
+/* DIFFERENTIATION */
+.diff{background:var(--white);}
+
+.vc-wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;border-radius:20px;overflow:hidden;
+  border:1px solid var(--grey);box-shadow:var(--sh-md);}
+.vc-divider{display:flex;align-items:center;justify-content:center;background:var(--paper);
+  border-left:1px solid var(--grey);border-right:1px solid var(--grey);padding:0 20px;}
+.vc-vs-badge{width:44px;height:44px;border-radius:50%;background:var(--white);border:1.5px solid var(--grey);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--grey-mid);font-family:var(--font-en);letter-spacing:.05em;}
+.vc-side{padding:36px 32px 40px;display:flex;flex-direction:column;}
+.vc-side.vc-them{background:var(--paper);}
+.vc-side.vc-us{background:var(--orange-light);position:relative;}
+.vc-side.vc-us::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange);}
+.vc-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.vc-avatar{width:56px;height:56px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.vc-them .vc-avatar{background:var(--white);border:2px dashed var(--grey-mid);}
+.vc-us .vc-avatar{background:var(--white);border:2px solid rgba(245,79,27,0.4);padding:10px;}
+.vc-us .vc-avatar img{width:100%;height:100%;object-fit:contain;}
+.vc-label{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;font-family:var(--font-en);}
+.vc-them .vc-label{color:var(--grey-mid);}
+.vc-us .vc-label{color:var(--orange-dark);}
+.vc-title{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:4px;letter-spacing:-.02em;}
+.vc-subtitle{font-size:13px;color:var(--grey-text);margin-bottom:24px;line-height:1.5;}
+.vc-list{list-style:none;display:flex;flex-direction:column;gap:11px;flex:1;}
+.vc-list li{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;line-height:1.55;}
+.vc-them .vc-list li{color:var(--grey-text);}
+.vc-us .vc-list li{color:var(--ink);}
+.vc-list .ti{font-size:15px;flex-shrink:0;margin-top:2px;}
+.vc-them .vc-list .ti{color:var(--grey-mid);}
+.vc-us .vc-list .ti{color:var(--orange);}
+.vc-list .ti-x{color:#D9534F !important;}
+.vc-cta{display:flex;align-items:center;gap:8px;justify-content:center;padding:14px 28px;background:linear-gradient(135deg,#FF6A38,var(--orange) 60%,var(--orange-dark));color:var(--white);
+  font-size:14px;font-weight:700;border-radius:10px;text-decoration:none;margin-top:26px;transition:all .2s;box-shadow:0 4px 20px rgba(245,79,27,0.4);}
+.vc-cta:hover{box-shadow:0 8px 26px rgba(245,79,27,0.5);transform:translateY(-2px);}
+@media(max-width:800px){.vc-wrap{grid-template-columns:1fr;}.vc-divider{padding:16px;border:none;border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);}}
+@media(max-width:800px){.diff-grid{grid-template-columns:1fr;}.diff-vs{display:none;}}
+
+/* CTA */
+.cta{background:
+    radial-gradient(circle at 50% 0%, rgba(245,79,27,0.18), transparent 55%),
+    linear-gradient(160deg,var(--ink-strong),#000);
+  color:var(--white);text-align:center;position:relative;}
+.cta-inner{max-width:640px;margin:0 auto;position:relative;z-index:1;}
+.cta .internal-slogan{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:18px;}
+.cta h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;margin-bottom:32px;line-height:1.4;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#FF6A38,var(--orange) 55%,var(--orange-dark));color:var(--white);padding:15px 28px;border-radius:var(--r-pill);font-weight:700;font-size:15.5px;box-shadow:var(--sh-md);transition:.25s;}
+.btn-primary:hover{box-shadow:0 12px 34px rgba(245,79,27,0.4);transform:translateY(-2px);}
+
+/* FOOTER */
+footer{background:#050505;color:rgba(255,255,255,0.45);padding:32px 48px;font-size:13px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;}
+.foot-brand{justify-self:start;}
+.foot-links.foot-social{justify-self:center;}
+.foot-copy{justify-self:end;}
+.foot-brand{display:flex;align-items:center;}
+.foot-brand .trail-lockup{position:relative;display:inline-block;}
+.foot-brand .trail-lockup img{height:28px;width:auto;display:block;filter:brightness(0) invert(1);}
+.foot-brand .trail-lockup .trail-text{position:absolute;left:104%;top:70%;
+  font-family:var(--font-en);font-weight:700;font-size:12px;letter-spacing:-0.01em;white-space:nowrap;color:var(--white);}
+footer .foot-links{display:flex;gap:20px;flex-wrap:wrap;}
+footer .foot-links a{font-size:12.5px;color:rgba(255,255,255,0.4);}
+footer .foot-social a{display:inline-flex;align-items:center;gap:6px;color:var(--grey-mid);}
+footer .foot-social i{font-size:15px;}
+footer a:hover{color:var(--orange);}
+.foot-copy{font-size:11.5px;color:rgba(255,255,255,0.3);}
+@media(max-width:700px){footer{grid-template-columns:1fr;justify-items:center;text-align:center;}}
+</style>
+</head>
+<body class="lang-ar">
+
+<nav class="navbar">
+  <a href="#" class="nav-brand">
+    <span class="trail-lockup">
+      <img src="assets/awn-mark-orange.png" alt="Awn Agents" />
+      <span class="trail-text">Agent</span>
+    </span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about" class="ar-content">من نحن</a><a href="#about" class="en-content">About</a></li>
+    <li><a href="#how-it-works" class="ar-content">كيف يعمل</a><a href="#how-it-works" class="en-content">How It Works</a></li>
+    <li><a href="#products" class="ar-content">المنتجات</a><a href="#products" class="en-content">Products</a></li>
+    <li><a href="#contact" class="ar-content">تواصل</a><a href="#contact" class="en-content">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('ar')">عربي</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="https://wa.me/201131209543" target="_blank" class="nav-cta">
+      <i class="ti ti-brand-whatsapp"></i>
+      <span class="ar-content">تواصل معنا</span>
+      <span class="en-content">Get in Touch</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO — prompt-first, Replit-style
+============================================================ -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <i class="ti ti-sparkles"></i>
+    <span class="ar-content">موظفون بالذكاء الاصطناعي لكل قطاع أو وظيفة</span>
+    <span class="en-content">AI Employees for Every Business</span>
+  </div>
+
+  <h1 class="ar-content">وظّف موظفين <span>بالذكاء الاصطناعي</span> يعملون معك<br/>وكأنهم أفراد من فريقك</h1>
+  <h1 class="en-content">Hire AI Employees That<br/>Work Like <span>Real Teammates</span></h1>
+
+  <div class="hero-tagline">
+    <p class="hero-tagline-text" id="taglineText"></p>
+  </div>
+
+  <form class="prompt-box" id="promptForm">
+    <textarea id="promptInput" rows="1"
+      class="ar-content" placeholder="صف ما حدث... مثلاً: بعتُ بضاعة بمبلغ ٥٠٠ جنيه"></textarea>
+    <textarea id="promptInputEn" rows="1"
+      class="en-content" placeholder="Tell us what happened... e.g. Sold goods for 500 EGP"></textarea>
+    <div class="prompt-row">
+      <div class="prompt-modes">
+        <button type="button" class="mode-chip mode-fathi" data-mode="fathi">
+          <i class="ti ti-calculator"></i>
+          <span class="ar-content">فتحي — محاسبة</span>
+          <span class="en-content">Fathi — Accounting</span>
+        </button>
+        <button type="button" class="mode-chip mode-care" data-mode="care">
+          <i class="ti ti-stethoscope"></i>
+          <span class="ar-content">Awn Care — طبي</span>
+          <span class="en-content">Awn Care — Medical</span>
+        </button>
+      </div>
+      <button type="submit" class="prompt-send">
+        <span class="ar-content">ابدأ</span>
+        <span class="en-content">Start</span>
+        <i class="ti ti-arrow-left"></i>
+      </button>
+    </div>
+  </form>
+
+  <div class="examples">
+    <span class="examples-label ar-content">أو جرّب مثال</span>
+    <span class="examples-label en-content">Or try an example</span>
+    <div class="examples-list">
+      <button type="button" class="example-pill" data-mode="fathi"
+        data-ar="دفعت إيجار المحل ٣٠٠٠ جنيه" data-en="Paid 3,000 EGP shop rent">
+        <span class="ar-content">دفعت إيجار المحل ٣٠٠٠ جنيه</span>
+        <span class="en-content">Paid 3,000 EGP shop rent</span>
+      </button>
+      <button type="button" class="example-pill" data-mode="fathi"
+        data-ar="هل أنا رابح أم خاسر هذا الشهر؟" data-en="Am I making a profit this month?">
+        <span class="ar-content">هل أنا رابح أم خاسر هذا الشهر؟</span>
+        <span class="en-content">Am I making a profit this month?</span>
+      </button>
+      <button type="button" class="example-pill" data-mode="care"
+        data-ar="وردت حالة كسر في القدم" data-en="A leg fracture case came in">
+        <span class="ar-content">وردت حالة كسر في القدم</span>
+        <span class="en-content">A leg fracture case came in</span>
+      </button>
+      <button type="button" class="example-pill" data-mode="care"
+        data-ar="سجّل كشف مريض جديد" data-en="Log a new patient visit">
+        <span class="ar-content">سجّل كشف مريض جديد</span>
+        <span class="en-content">Log a new patient visit</span>
+      </button>
+      <button type="button" class="example-pill" data-mode="fathi"
+        data-ar="كم رصيدي النقدي الآن؟" data-en="What's my cash balance right now?">
+        <span class="ar-content">كم رصيدي النقدي الآن؟</span>
+        <span class="en-content">What's my cash balance right now?</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section id="about" class="dashed-top">
+  <div class="section-inner about-grid">
+    <div>
+      <span class="eyebrow ar-content">من نحن</span>
+      <span class="eyebrow en-content">About Us</span>
+      <h2 class="section-title ar-content">شركة تبني موظفين، لا أدوات</h2>
+      <h2 class="section-title en-content">A company that builds employees, not tools</h2>
+    </div>
+    <div>
+      <p class="ar-content"><strong>Awn Agents</strong> هي شركة متخصصة في بناء موظفين يعملون بالذكاء الاصطناعي. لسنا منصة محادثة، ولسنا مجرد أدوات ذكاء اصطناعي.</p>
+      <p class="ar-content">نحن نبني موظفين متخصصين، لكل منهم وظيفة واضحة، قادرين على فهم الكلام الطبيعي وتحويله إلى بيانات منظمة وتقارير دقيقة، ليعملوا معك وكأنهم أفراد جدد في فريقك.</p>
+      <p class="ar-content">بدأت رحلتنا مع "فتحي"، الموظف المالي الذكي، وبعد نجاحه توسعنا لبناء موظفين متخصصين لمجالات أخرى، بدايةً من القطاع الطبي، ومستقبلاً لكل وظيفة تعتمد على التوثيق والتنظيم واتخاذ القرار.</p>
+
+      <p class="en-content"><strong>Awn Agents</strong> is a company that builds AI employees. We are not a chat platform, and not just another AI tool.</p>
+      <p class="en-content">We build specialized employees — each with one clear job — that understand natural speech and turn it into structured data and accurate reports, working with you like a new member of your team.</p>
+      <p class="en-content">Our journey started with Fathi, the smart financial employee. After his success, we expanded to build specialized employees for other fields, starting with healthcare — and eventually, for every job built on documentation, organization, and decision-making.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VISION / MISSION
+============================================================ -->
+<section style="background:var(--white);border-top:1px solid var(--grey);border-bottom:1px solid var(--grey);">
+  <div class="section-inner vm-grid">
+    <div class="vm-card">
+      <i class="ti ti-telescope"></i>
+      <div class="vm-label ar-content">الرؤية</div>
+      <div class="vm-label en-content">Vision</div>
+      <h3 class="ar-content">نبني موظف ذكاء اصطناعي لكل مهنة تعتمد على التوثيق والتنظيم وإعداد التقارير.</h3>
+      <h3 class="en-content">To build an AI employee for every profession that relies on documentation, organization, and reporting.</h3>
+    </div>
+    <div class="vm-card">
+      <i class="ti ti-target-arrow"></i>
+      <div class="vm-label ar-content">الرسالة</div>
+      <div class="vm-label en-content">Mission</div>
+      <h3 class="ar-content">نجعل الناس ينجزون أعمالهم بالطريقة الطبيعية التي اعتادوا عليها، بينما يتولى الذكاء الاصطناعي التوثيق والتنظيم وإعداد التقارير.</h3>
+      <h3 class="en-content">We help professionals work naturally while AI handles documentation, organization, and reporting.</h3>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOW IT WORKS
+============================================================ -->
+<section id="how-it-works" style="background:var(--paper);border-top:1px solid var(--grey);border-bottom:1px solid var(--grey);">
+  <div class="section-inner" style="text-align:center;">
+    <span class="eyebrow ar-content">كيف يعمل</span>
+    <span class="eyebrow en-content">How It Works</span>
+    <h2 class="section-title ar-content" style="margin-inline:auto;">خمس خطوات، بدون ورق</h2>
+    <h2 class="section-title en-content" style="margin-inline:auto;">Five steps, zero paperwork</h2>
+    <div class="steps-row" style="margin-top:64px;">
+      <div class="step fade-up">
+        <div class="step-num"><span class="ar-inline">١</span><span class="en-inline">1</span></div>
+        <i class="ti ti-microphone step-icon"></i>
+        <h4 class="ar-content">تحدث بشكل طبيعي</h4><h4 class="en-content">Speak naturally</h4>
+        <p class="step-desc ar-content">قل ما حدث بصوتك أو بالكتابة، تمامًا كما تتحدث مع أي شخص.</p>
+        <p class="step-desc en-content">Say what happened, by voice or text — just like talking to anyone.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num"><span class="ar-inline">٢</span><span class="en-inline">2</span></div>
+        <i class="ti ti-brain step-icon"></i>
+        <h4 class="ar-content">الوكيل يفهم السياق</h4><h4 class="en-content">Agent understands context</h4>
+        <p class="step-desc ar-content">الذكاء الاصطناعي يميّز نوع العملية والتفاصيل المهمة فيها.</p>
+        <p class="step-desc en-content">The AI identifies the type of entry and the details that matter.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num"><span class="ar-inline">٣</span><span class="en-inline">3</span></div>
+        <i class="ti ti-file-check step-icon"></i>
+        <h4 class="ar-content">يوثق البيانات</h4><h4 class="en-content">Documents the data</h4>
+        <p class="step-desc ar-content">يسجلها في مكان منظم فورًا، دون أن تكتب شيئًا بيدك.</p>
+        <p class="step-desc en-content">Logs it in a structured place instantly — no manual entry.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num"><span class="ar-inline">٤</span><span class="en-inline">4</span></div>
+        <i class="ti ti-layout-grid step-icon"></i>
+        <h4 class="ar-content">ينظمها</h4><h4 class="en-content">Organizes it</h4>
+        <p class="step-desc ar-content">يرتبها مع باقي بياناتك لتكون جاهزة عندما تحتاجها.</p>
+        <p class="step-desc en-content">Arranges it with the rest of your data, ready whenever you need it.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num"><span class="ar-inline">٥</span><span class="en-inline">5</span></div>
+        <i class="ti ti-chart-bar step-icon"></i>
+        <h4 class="ar-content">ينشئ التقارير</h4><h4 class="en-content">Generates reports</h4>
+        <p class="step-desc ar-content">يقدّم لك تقريرًا واضحًا أو إجابة مباشرة عن سؤالك.</p>
+        <p class="step-desc en-content">Delivers a clear report or a direct answer to your question.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PHILOSOPHY
+============================================================ -->
+<section class="philosophy">
+  <div class="section-inner">
+    <p class="ar-content">يجب أن يركز الناس على عملهم.<br/><span class="line2">وعلى الذكاء الاصطناعي أن يتولى التوثيق.</span></p>
+    <p class="en-content">People should focus on work.<br/><span class="line2">AI should handle documentation.</span></p>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCTS
+============================================================ -->
+<section id="products" style="background:var(--white);border-top:1px solid var(--grey);">
+  <div class="section-inner">
+    <span class="eyebrow ar-content">منتجاتنا</span>
+    <span class="eyebrow en-content">Our Products</span>
+    <h2 class="section-title ar-content">شركة واحدة. موظفون أذكياء كثيرون.</h2>
+    <h2 class="section-title en-content">One Company. Many AI Employees.</h2>
+    <p class="section-sub" style="margin-bottom:50px;">
+      <span class="ar-content">أدوات الذكاء الاصطناعي تساعدك على تنفيذ مهمة. أما Awn Agents فتمنحك موظفًا متخصصًا يقوم بالمهمة كاملة من البداية للنهاية.</span>
+      <span class="en-content">AI tools help you complete a task. Awn Agents gives you a specialized employee who owns the entire job, start to finish.</span>
+    </p>
+
+    <div class="products-grid">
+      <div class="product-card fade-up">
+        <div class="product-mark mark-fathi">ف</div>
+        <div class="p-eyebrow ar-content">فتحي</div>
+        <div class="p-eyebrow en-content">Fathi</div>
+        <h3 class="ar-content">محاسبك الذكي</h3>
+        <h3 class="en-content">Your AI Accountant</h3>
+        <p class="tagline ar-content">موظف مالي يعمل 24/7</p>
+        <p class="tagline en-content">A financial employee that works 24/7</p>
+        <p class="desc ar-content">يتحدث معه صاحب المشروع بصوته أو بالكتابة، فيقوم بتحويل الكلام إلى قيود محاسبية، وتنظيم الإيرادات والمصروفات، وإصدار تقارير مالية والإجابة عن أسئلة مثل: "هل أنا رابح أم خاسر؟"</p>
+        <p class="desc en-content">Business owners talk to Fathi by voice or text. He turns speech into accounting entries, organizes income and expenses, issues financial reports, and answers questions like "Am I making a profit?"</p>
+        <a href="../fathi/index (2).html" class="product-link" target="_blank">
+          <span class="ar-content">زور فتحي</span>
+          <span class="en-content">Visit Fathi</span>
+          <i class="ti ti-arrow-left"></i>
+        </a>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-mark mark-care">C</div>
+        <div class="p-eyebrow ar-content">Awn Care</div>
+        <div class="p-eyebrow en-content">Awn Care</div>
+        <h3 class="ar-content">مساعدك الطبي للتوثيق الذكي</h3>
+        <h3 class="en-content">Your AI Medical Documentation Assistant</h3>
+        <p class="tagline ar-content">مساعد طبي ذكي للأطباء</p>
+        <p class="tagline en-content">A smart medical assistant for doctors</p>
+        <p class="desc ar-content">يستمع لوصف الحالة أثناء العمل، ثم يحولها إلى توثيق طبي منظم وتقارير ولوحات متابعة، دون الحاجة للكتابة اليدوية.</p>
+        <p class="desc en-content">Listens to the case description on the spot, then turns it into structured medical documentation, reports, and tracking dashboards — no manual writing needed.</p>
+        <a href="awn-care/index.html" class="product-link">
+          <span class="ar-content">اعرف المزيد</span>
+          <span class="en-content">Learn More</span>
+          <i class="ti ti-arrow-left"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY AWN
+============================================================ -->
+<section>
+  <div class="section-inner why-grid">
+    <div>
+      <span class="eyebrow ar-content">لماذا Awn؟</span>
+      <span class="eyebrow en-content">Why Awn?</span>
+      <h2 class="section-title ar-content">الكلام أسرع من الكتابة</h2>
+      <h2 class="section-title en-content">Talking is faster than writing</h2>
+      <p class="section-sub ar-content">لأن الموظفين يقضون وقتًا طويلًا في كتابة ما حدث، بينما يمكنهم ببساطة أن يتحدثوا. نحن نحول الكلام الطبيعي إلى بيانات منظمة وتقارير جاهزة في ثوانٍ.</p>
+      <p class="section-sub en-content">Professionals spend too much time writing down what already happened — when they could simply say it. We turn natural speech into structured data and ready reports in seconds.</p>
+    </div>
+    <div class="why-visual">
+      <div class="why-row"><i class="ti ti-microphone"></i><span class="ar-content">تتحدث بشكل طبيعي</span><span class="en-content">You speak naturally</span></div>
+      <div class="why-row"><i class="ti ti-brain"></i><span class="ar-content">الوكيل يفهم السياق</span><span class="en-content">The agent understands context</span></div>
+      <div class="why-row"><i class="ti ti-file-check"></i><span class="ar-content">يوثق وينظم البيانات</span><span class="en-content">Documents and organizes the data</span></div>
+      <div class="why-row"><i class="ti ti-chart-bar"></i><span class="ar-content">ينشئ التقارير تلقائيًا</span><span class="en-content">Generates reports automatically</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     DIFFERENTIATION
+============================================================ -->
+<section class="diff">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:50px;">
+      <span class="eyebrow ar-content">الفرق</span>
+      <span class="eyebrow en-content">The Difference</span>
+      <h2 class="section-title ar-content" style="margin-inline:auto;">لسنا أداة ذكاء اصطناعي أخرى</h2>
+      <h2 class="section-title en-content" style="margin-inline:auto;">Not just another AI tool</h2>
+    </div>
+    <div class="vc-wrap fade-up">
+      <!-- GENERIC AI TOOLS -->
+      <div class="vc-side vc-them">
+        <div class="vc-head">
+          <div class="vc-avatar"><i class="ti ti-robot" style="font-size:22px;color:rgba(255,255,255,0.25);"></i></div>
+          <div>
+            <div class="vc-label">
+              <span class="ar-content">أداة عامة</span><span class="en-content">Generic Tool</span>
+            </div>
+            <div class="vc-title ar-content">أداة ذكاء اصطناعي</div>
+            <div class="vc-title en-content">A Generic AI Tool</div>
+          </div>
+        </div>
+        <div class="vc-subtitle ar-content">مبنية لأي حد، مش لشغلك بالذات</div>
+        <div class="vc-subtitle en-content">Built for everyone, not built for your business</div>
+        <ul class="vc-list">
+          <li><i class="ti ti-x"></i><span class="ar-content">تحتاج تكتب برومبت في كل مرة</span><span class="en-content">You write a prompt every time</span></li>
+          <li><i class="ti ti-x"></i><span class="ar-content">مش فاكرة سياق شغلك من مرة لمرة</span><span class="en-content">Forgets your business context between sessions</span></li>
+          <li><i class="ti ti-x"></i><span class="ar-content">بتديك نص خام، وإنت اللي ترتبه</span><span class="en-content">Gives you raw output — you organize it</span></li>
+          <li><i class="ti ti-x"></i><span class="ar-content">مفيش متابعة ولا تقارير جاهزة</span><span class="en-content">No ongoing tracking or ready reports</span></li>
+          <li><i class="ti ti-x"></i><span class="ar-content">لازم تتعلم تستخدمها صح</span><span class="en-content">You have to learn how to use it well</span></li>
+        </ul>
+      </div>
+
+      <div class="vc-divider"><div class="vc-vs-badge">VS</div></div>
+
+      <!-- AWN AGENTS -->
+      <div class="vc-side vc-us">
+        <div class="vc-head">
+          <div class="vc-avatar"><img src="assets/awn-mark-orange.png" alt="Awn Agents" /></div>
+          <div>
+            <div class="vc-label">Awn Agents</div>
+            <div class="vc-title ar-content">وكيل متخصص</div>
+            <div class="vc-title en-content">A Specialized Agent</div>
+          </div>
+        </div>
+        <div class="vc-subtitle ar-content">مبني لقطاعك مخصصه، ويعمل معك يوميًا</div>
+        <div class="vc-subtitle en-content">Built for your exact trade, working with you every day</div>
+        <ul class="vc-list">
+          <li><i class="ti ti-circle-check"></i><span class="ar-content">تتحدث بشكل طبيعي، بدون برومبت</span><span class="en-content">You just talk naturally, no prompting</span></li>
+          <li><i class="ti ti-circle-check"></i><span class="ar-content">يتعلم سياق شغلك ويتذكره</span><span class="en-content">Learns and remembers your business context</span></li>
+          <li><i class="ti ti-circle-check"></i><span class="ar-content">يوثق وينظم البيانات بنفسه</span><span class="en-content">Documents and organizes the data itself</span></li>
+          <li><i class="ti ti-circle-check"></i><span class="ar-content">تقارير جاهزة في أي وقت تطلبها</span><span class="en-content">Ready reports whenever you ask</span></li>
+          <li><i class="ti ti-circle-check"></i><span class="ar-content">تستخدمه من أول دقيقة، بدون تدريب</span><span class="en-content">Usable from minute one, no training</span></li>
+        </ul>
+        <a href="https://wa.me/201131209543" target="_blank" class="vc-cta">
+          <i class="ti ti-brand-whatsapp"></i>
+          <span class="ar-content">تواصل معنا الآن</span>
+          <span class="en-content">Get in Touch Now</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA
+============================================================ -->
+<section class="cta" id="contact">
+  <div class="cta-inner">
+    <div class="internal-slogan">
+      <span class="ar-content">شركة واحدة. موظفون أذكياء كثيرون.</span>
+      <span class="en-content">One Company. Many AI Employees.</span>
+    </div>
+    <h2 class="ar-content">موظفون بالذكاء الاصطناعي لكل قطاع أو وظيفة.</h2>
+    <h2 class="en-content">AI Employees for Every Business.</h2>
+    <a href="https://wa.me/201131209543" target="_blank" class="btn-primary">
+      <i class="ti ti-brand-whatsapp"></i>
+      <span class="ar-content">تواصل معنا</span>
+      <span class="en-content">Get in Touch</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-brand">
+    <span class="trail-lockup">
+      <img src="assets/awn-mark-orange.png" alt="Awn Agents" />
+      <span class="trail-text">Agent</span>
+    </span>
+  </div>
+  <div class="foot-links foot-social">
+    <a href="#" target="_blank"><i class="ti ti-brand-instagram"></i> Instagram</a>
+    <a href="#" target="_blank"><i class="ti ti-brand-facebook"></i> Facebook</a>
+    <a href="#" target="_blank"><i class="ti ti-brand-linkedin"></i> LinkedIn</a>
+  </div>
+  <div class="foot-copy">
+    <span class="ar-content">من مصر إلى العالم العربي · ٢٠٢٦</span>
+    <span class="en-content">From Egypt to the Arab World · 2026</span>
+  </div>
+</footer>
+
+<script>
+function setLang(lang){
+  document.body.className = 'lang-' + lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  localStorage.setItem('awn_lang', lang);
+  renderTagline();
+}
+(function(){
+  const saved = localStorage.getItem('awn_lang');
+  if (saved && saved !== 'ar') setLang(saved);
+})();
+
+/* Cycling hero tagline */
+const taglines = {
+  ar: [
+    'كل موظف داخل Awn Agents متخصص في وظيفة واحدة.',
+    'تتحدث بصوتك أو تكتب بشكل طبيعي، وهو يستمع، يوثق، يرتب، ويقدّم لك التقارير.',
+    'ركّز على عملك... واترك التوثيق لنا.'
+  ],
+  en: [
+    'Every Awn Agent is built for one job.',
+    'You talk naturally by voice or text, and your AI employee listens, documents, organizes, and delivers reports.',
+    'Focus on your work. Leave the documentation to us.'
+  ]
+};
+let taglineIdx = 0, taglineTimer = null;
+function renderTagline(){
+  const lang = document.body.classList.contains('lang-en') ? 'en' : 'ar';
+  const el = document.getElementById('taglineText');
+  el.style.opacity = 0;
+  setTimeout(()=>{
+    el.textContent = taglines[lang][taglineIdx % taglines[lang].length];
+    el.style.opacity = 1;
+  }, 200);
+}
+renderTagline();
+taglineTimer = setInterval(()=>{ taglineIdx++; renderTagline(); }, 4200);
+
+/* Prompt box: mode chips + example pills + routing */
+const modeChips = document.querySelectorAll('.mode-chip');
+let selectedMode = null;
+modeChips.forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    const isActive = chip.classList.contains('active');
+    modeChips.forEach(c=>c.classList.remove('active'));
+    if(!isActive){ chip.classList.add('active'); selectedMode = chip.dataset.mode; }
+    else { selectedMode = null; }
+  });
+});
+
+document.querySelectorAll('.example-pill').forEach(pill=>{
+  pill.addEventListener('click', ()=>{
+    const isEn = document.body.classList.contains('lang-en');
+    const arBox = document.getElementById('promptInput');
+    const enBox = document.getElementById('promptInputEn');
+    arBox.value = pill.dataset.ar;
+    enBox.value = pill.dataset.en;
+    modeChips.forEach(c=>c.classList.remove('active'));
+    const match = document.querySelector('.mode-chip[data-mode="'+pill.dataset.mode+'"]');
+    if(match){ match.classList.add('active'); selectedMode = pill.dataset.mode; }
+    (isEn ? enBox : arBox).focus();
+  });
+});
+
+const FATHI_WORDS = ['جنيه','دفعت','بعت','اشتريت','فلوس','مصروف','دخل','كسبان','خسران','حساب','فاتورة','إيجار','ربح','دينار','egp','paid','sold','profit','expense','invoice','rent','revenue'];
+const CARE_WORDS = ['مريض','حالة','كشف','دكتور','عيادة','امتياز','تشخيص','علاج','جرح','كسر','مستشفى','patient','case','diagnosis','doctor','clinic','hospital','treatment'];
+
+document.getElementById('promptForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const isEn = document.body.classList.contains('lang-en');
+  const text = (isEn ? document.getElementById('promptInputEn').value : document.getElementById('promptInput').value).toLowerCase();
+
+  let target = selectedMode;
+  if(!target && text.trim()){
+    const fathiScore = FATHI_WORDS.filter(w=>text.includes(w)).length;
+    const careScore = CARE_WORDS.filter(w=>text.includes(w)).length;
+    if(fathiScore > careScore) target = 'fathi';
+    else if(careScore > fathiScore) target = 'care';
+  }
+
+  if(target === 'fathi'){
+    window.open('../fathi/index (2).html', '_blank');
+  } else if(target === 'care'){
+    window.location.href = 'awn-care/index.html';
+  } else {
+    document.getElementById('products').scrollIntoView({behavior:'smooth'});
+  }
+});
+
+/* Autosize textareas */
+document.querySelectorAll('.prompt-box textarea').forEach(t=>{
+  t.addEventListener('input', function(){
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 140) + 'px';
+  });
+});
+
+/* Fade-up on scroll */
+(function(){
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); } });
+  }, {threshold:0.15});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+})();
+</script>
+</body>
+</html>

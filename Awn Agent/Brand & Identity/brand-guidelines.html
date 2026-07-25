@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brand Guidelines — Awn Agents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link rel="icon" type="image/png" href="../assets/awn-mark-black.png" />
+
+  <style>
+    /* ===========================
+       CSS CUSTOM PROPERTIES
+    =========================== */
+    :root {
+      --ink:          #313337;
+      --ink-strong:   #18191B;
+      --ink-dark:     #000000;
+      --orange:       #FF3C00;
+      --orange-dark:  #D63500;
+      --orange-light: #FFEAE0;
+      --blue:         #2492FF;
+      --secondary:    #FFB199;
+      --paper:        #FAF6F1;
+      --ink-text:     #18191B;
+      --grey-1:       #6B6660;
+      --grey-2:       #9A958E;
+      --grey-3:       #B5AFA8;
+      --rule-grey:    #EBE4DC;
+      --white:        #FFFFFF;
+
+      --font-arabic: 'IBM Plex Sans Arabic', sans-serif;
+      --font-en:     'IBM Plex Sans', sans-serif;
+
+      --radius:    6px;
+      --radius-lg: 14px;
+      --shadow:    0 2px 12px rgba(24,25,27,0.06);
+      --shadow-md: 0 4px 24px rgba(24,25,27,0.10);
+    }
+
+    /* ===========================
+       RESET & BASE
+    =========================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink-text);
+      font-size: 16px;
+      line-height: 1.7;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    body.lang-ar { font-family: var(--font-arabic); direction: rtl; }
+    body.lang-en { font-family: var(--font-en); direction: ltr; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ===========================
+       LANGUAGE TOGGLE
+    =========================== */
+    .lang-toggle {
+      display: flex;
+      gap: 0;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: auto 24px 24px;
+      margin-top: auto;
+    }
+
+    .lang-btn {
+      flex: 1;
+      padding: 8px 14px;
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lang-btn:hover { color: rgba(255,255,255,0.75); }
+
+    .lang-btn.active {
+      background: rgba(255,255,255,0.12);
+      color: var(--white);
+    }
+
+    /* ===========================
+       SIDEBAR
+    =========================== */
+    .sidebar {
+      width: 236px;
+      min-width: 236px;
+      background: var(--ink-strong);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 0 0;
+      z-index: 100;
+    }
+
+    .sidebar-brand {
+      padding: 0 24px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 20px;
+    }
+
+    .sidebar-brand img {
+      width: 100px;
+      margin-bottom: 14px;
+      filter: brightness(0) invert(1);
+    }
+
+    .sidebar-brand .brand-name-ar {
+      font-family: var(--font-arabic);
+      color: var(--white);
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .sidebar-brand .brand-name-en {
+      font-family: var(--font-en);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-name-ar span,
+    .brand-name-en span { color: var(--orange); }
+
+    .sidebar-brand .brand-sub {
+      font-family: var(--font-en);
+      color: rgba(255,255,255,0.4);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 4px;
+      direction: ltr;
+    }
+
+    .sidebar nav { padding: 0 12px; }
+
+    .nav-label {
+      font-family: var(--font-en);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      padding: 0 10px;
+      margin-bottom: 6px;
+      margin-top: 20px;
+      direction: ltr;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 10px;
+      border-radius: 6px;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 13.5px;
+      transition: background 0.15s, color 0.15s;
+      margin-bottom: 2px;
+    }
+
+    .lang-ar .nav-link { font-family: var(--font-arabic); }
+    .lang-en .nav-link { font-family: var(--font-en); direction: ltr; }
+
+    .nav-link:hover, .nav-link.active {
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+    }
+
+    .nav-link .ti {
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+
+    /* ===========================
+       MAIN
+    =========================== */
+    .main {
+      flex: 1;
+      overflow-x: hidden;
+      padding: 64px 56px;
+      max-width: 980px;
+    }
+
+    /* ===========================
+       SECTION LAYOUT
+    =========================== */
+    .section { margin-bottom: 96px; }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange-dark);
+      background: var(--orange-light);
+      border: 1px solid var(--rule-grey);
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+      direction: ltr;
+    }
+
+    .section-title-ar {
+      font-family: var(--font-arabic);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .section-title-en {
+      font-family: var(--font-en);
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      direction: ltr;
+    }
+
+    .section-desc-ar {
+      font-family: var(--font-arabic);
+      font-size: 15.5px;
+      color: var(--grey-1);
+      margin-bottom: 36px;
+      max-width: 540px;
+    }
+
+    .section-desc-en {
+      font-family: var(--font-en);
+      font-size: 15px;
+      color: var(--grey-1);
+      margin-bottom: 36px;
+      max-width: 540px;
+      direction: ltr;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: repeating-linear-gradient(
+        to right,
+        var(--rule-grey) 0, var(--rule-grey) 8px,
+        transparent 8px, transparent 16px
+      );
+      margin-bottom: 36px;
+    }
+
+    h3.sub {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-2);
+      margin-bottom: 16px;
+      margin-top: 36px;
+      direction: ltr;
+    }
+
+    /* ===========================
+       COVER / HERO
+    =========================== */
+    .cover {
+      background: var(--ink-strong);
+      border-radius: var(--radius-lg);
+      padding: 52px 48px;
+      margin-bottom: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 28px,
+        rgba(255,255,255,0.025) 28px, rgba(255,255,255,0.025) 29px
+      );
+    }
+
+    .cover-text { position: relative; z-index: 1; }
+
+    .cover-eyebrow {
+      font-family: var(--font-en);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+      direction: ltr;
+    }
+
+    .cover-title-ar {
+      font-family: var(--font-arabic);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .cover-title-en {
+      font-family: var(--font-en);
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+      direction: ltr;
+    }
+
+    .cover-title-ar span,
+    .cover-title-en span { color: var(--orange); }
+
+    .cover-subtitle {
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.4);
+      direction: ltr;
+      margin-bottom: 20px;
+    }
+
+    .cover-meta {
+      font-family: var(--font-en);
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      direction: ltr;
+      letter-spacing: 0.04em;
+    }
+
+    .cover-image {
+      width: 190px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      filter: brightness(0) invert(1);
+      opacity: 0.95;
+    }
+
+    /* ===========================
+       LOGO SECTION
+    =========================== */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .logo-card {
+      border-radius: var(--radius);
+      padding: 40px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid var(--rule-grey);
+    }
+
+    .logo-card.on-light   { background: var(--white); }
+    .logo-card.on-paper   { background: var(--paper); }
+    .logo-card.on-tint    { background: var(--orange-light); border-color: #F5C5A8; }
+    .logo-card.on-dark    { background: var(--ink-strong); border-color: var(--ink-strong); }
+    .logo-card.on-orange  { background: var(--orange); border-color: var(--orange); }
+    .logo-card.on-blue    { background: var(--blue); border-color: var(--blue); }
+
+    .logo-card img { width: 120px; }
+    .logo-card.on-dark img,
+    .logo-card.on-orange img,
+    .logo-card.on-blue img { filter: brightness(0) invert(1); }
+
+    .logo-card-label {
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey-2);
+      direction: ltr;
+    }
+
+    .logo-card.on-dark .logo-card-label,
+    .logo-card.on-orange .logo-card-label,
+    .logo-card.on-blue .logo-card-label { color: rgba(255,255,255,0.5); }
+
+    .clearspace-demo {
+      background: var(--white);
+      border: 1px solid var(--rule-grey);
+      border-radius: var(--radius);
+      padding: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .clearspace-inner {
+      position: relative;
+      display: inline-flex;
+    }
+
+    .clearspace-inner img {
+      width: 140px;
+      padding: 24px;
+      border: 2px dashed var(--orange);
+      box-sizing: content-box;
+    }
+
+    .cs-label {
+      position: absolute;
+      font-family: var(--font-en);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--orange);
+      direction: ltr;
+    }
+    .cs-label.top    { top: -18px; left: 50%; transform: translateX(-50%); }
+    .cs-label.bottom { bottom: -18px; left: 50%; transform: translateX(-50%); }
+    .cs-label.left   { left: -20px; top: 50%; transform: translateY(-50%); }
+    .cs-label.right  { right: -20px; top: 50%; transform: translateY(-50%); }
+
+    .donts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .dont-card {
+      border: 1.5px solid #FFCDD2;
+      border-radius: var(--radius);
+      background: #FFF8F8;
+      padding: 24px 16px 16px;
+      text-align: center;
+    }
+
+    .dont-card img {
+      width: 100px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .approved-lockup {
+      background: var(--white);
+      border: 2px solid var(--orange);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .approved-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--orange);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      direction: ltr;
+    }
+
+    .approved-lockup img {
+      max-width: 340px;
+      width: 100%;
+      margin: 0 auto 20px;
+    }
+
+    .approved-note {
+      font-family: var(--font-arabic);
+      font-size: 13.5px;
+      color: var(--grey-1);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .approved-note .en-content {
+      font-family: var(--font-en);
+      direction: ltr;
+    }
+
+    .wordmark-row-label {
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-2);
+      margin-bottom: 10px;
+      direction: ltr;
+    }
+
+    .wordmark-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .wordmark-card {
+      border-radius: var(--radius);
+      padding: 30px 14px 18px;
+      text-align: center;
+      border: 1px solid var(--rule-grey);
+    }
+
+    .wordmark-card.bg-white { background: var(--white); }
+    .wordmark-card.bg-paper { background: var(--paper); }
+
+    .wordmark-card img { width: 110px; margin: 0 auto -10px; display: block; }
+
+    .wordmark-card .wm-text {
+      font-family: var(--font-en);
+      font-weight: 700;
+      font-size: 21px;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      direction: ltr;
+    }
+
+    .wordmark-card .wm-label {
+      font-family: var(--font-en);
+      font-size: 9.5px;
+      color: var(--grey-2);
+      direction: ltr;
+      letter-spacing: 0.02em;
+    }
+
+    /* Trailing lockup — "Agent" sits below, starting under where the last N-stroke ends */
+    .trail-lockup {
+      position: relative;
+      display: inline-block;
+      direction: ltr;
+    }
+    .trail-lockup img { width: 128px; display: block; }
+    .wordmark-card:has(.trail-lockup) { padding-right: 66px; }
+    .trail-lockup .trail-text {
+      position: absolute;
+      left: 98%;
+      top: 100%;
+      margin-top: -2px;
+      font-family: var(--font-en);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .dont-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-family: var(--font-en);
+      font-size: 11px;
+      color: #C62828;
+      font-weight: 600;
+      direction: ltr;
+    }
+
+    /* ===========================
+       COLOR PALETTE
+    =========================== */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .color-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--rule-grey);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .color-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    .color-swatch { height: 90px; position: relative; }
+
+    .copy-btn {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(0,0,0,0.22);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-en);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 8px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.15s;
+      direction: ltr;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .color-card:hover .copy-btn { opacity: 1; }
+    .copy-btn.copied { background: rgba(0,0,0,0.45); }
+
+    .color-info { background: var(--white); padding: 14px 16px; }
+
+    .color-name-ar { font-family: var(--font-arabic); font-size: 14px; font-weight: 600; color: var(--ink-text); margin-bottom: 1px; }
+    .color-name-en { font-family: var(--font-en); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey-2); margin-bottom: 8px; direction: ltr; }
+    .color-hex { font-family: var(--font-en); font-size: 13px; font-weight: 700; color: var(--ink); direction: ltr; margin-bottom: 1px; }
+    .color-rgb { font-family: var(--font-en); font-size: 11px; color: var(--grey-3); direction: ltr; margin-bottom: 8px; }
+    .color-use-ar { font-family: var(--font-arabic); font-size: 12px; color: var(--grey-1); line-height: 1.5; }
+    .color-use-en { font-family: var(--font-en); font-size: 11px; color: var(--grey-1); line-height: 1.5; direction: ltr; }
+
+    /* ===========================
+       TYPOGRAPHY
+    =========================== */
+    .type-block { background: var(--white); border: 1px solid var(--rule-grey); border-radius: var(--radius); padding: 28px 32px; margin-bottom: 18px; }
+    .type-block-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--rule-grey); }
+    .type-block-title { font-family: var(--font-en); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-2); direction: ltr; }
+    .type-tag { font-family: var(--font-en); font-size: 10px; font-weight: 600; color: var(--orange-dark); background: var(--orange-light); border: 1px solid var(--rule-grey); padding: 3px 10px; border-radius: 100px; direction: ltr; }
+    .type-row { display: flex; align-items: baseline; gap: 20px; padding: 12px 0; border-bottom: 1px solid var(--orange-light); }
+    .type-row:last-child { border-bottom: none; }
+    .type-meta { min-width: 110px; flex-shrink: 0; }
+    .type-meta-label { font-family: var(--font-en); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-2); direction: ltr; }
+    .type-meta-size { font-family: var(--font-en); font-size: 10px; color: var(--grey-3); direction: ltr; }
+    .sample-ar { font-family: var(--font-arabic); color: var(--ink-text); }
+    .sample-en { font-family: var(--font-en); color: var(--ink-text); direction: ltr; }
+
+    .font-pairing { background: var(--ink-strong); border-radius: var(--radius); padding: 40px 44px; margin-bottom: 18px; position: relative; overflow: hidden; }
+    .font-pairing::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(255,255,255,0.025) 28px, rgba(255,255,255,0.025) 29px); }
+    .pairing-main-ar { font-family: var(--font-arabic); font-size: 38px; font-weight: 700; color: var(--white); line-height: 1.25; position: relative; z-index: 1; }
+    .pairing-main-en { font-family: var(--font-en); font-size: 36px; font-weight: 700; color: var(--white); line-height: 1.15; letter-spacing: -0.03em; position: relative; z-index: 1; direction: ltr; }
+    .pairing-main-ar span, .pairing-main-en span { color: var(--orange); }
+    .pairing-sub { font-family: var(--font-en); font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 6px; direction: ltr; position: relative; z-index: 1; }
+
+    .font-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .rule-card { border-radius: var(--radius); padding: 18px 20px; border: 1px solid var(--rule-grey); }
+    .rule-card.do   { background: #FFF6F2; border-color: #FFCBB5; }
+    .rule-card.dont { background: #FFF8F8; border-color: #FFCDD2; }
+    .rule-badge { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-en); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; direction: ltr; }
+    .do .rule-badge   { background: #FFE0D0; color: var(--orange-dark); }
+    .dont .rule-badge { background: #FFCDD2; color: #C62828; }
+    .rule-text-ar { font-family: var(--font-arabic); font-size: 14px; color: var(--ink-text); line-height: 1.65; }
+    .rule-text-en { font-family: var(--font-en); font-size: 13px; color: var(--ink-text); line-height: 1.65; direction: ltr; }
+
+    /* ===========================
+       THE MARK
+    =========================== */
+    .mascot-block { background: var(--white); border: 1px solid var(--rule-grey); border-radius: var(--radius-lg); padding: 36px; display: flex; align-items: flex-start; gap: 36px; margin-bottom: 18px; }
+    .mascot-block img { width: 190px; object-fit: contain; flex-shrink: 0; margin-top: 6px; }
+    .trait-list { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .trait { display: flex; gap: 12px; align-items: flex-start; }
+    .trait-icon { color: var(--orange); font-size: 16px; margin-top: 3px; flex-shrink: 0; }
+    .trait-text-ar { font-family: var(--font-arabic); font-size: 14.5px; color: var(--ink-text); line-height: 1.6; }
+    .trait-text-en { font-family: var(--font-en); font-size: 13.5px; color: var(--ink-text); line-height: 1.6; direction: ltr; }
+    .trait-bold { font-weight: 700; color: var(--ink); }
+
+    /* ===========================
+       UI COMPONENTS
+    =========================== */
+    .comp-section { margin-bottom: 36px; }
+    .comp-label { font-family: var(--font-en); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-2); margin-bottom: 14px; direction: ltr; }
+    .comp-preview { background: var(--white); border: 1px solid var(--rule-grey); border-radius: var(--radius) var(--radius) 0 0; padding: 32px 28px; display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+    .comp-preview.dark { background: var(--ink-strong); }
+    .comp-code { background: #18191B; border-radius: 0 0 var(--radius) var(--radius); padding: 18px 22px; overflow-x: auto; }
+    .comp-code pre { font-family: 'Courier New', monospace; font-size: 11.5px; color: #FFC1A8; line-height: 1.65; direction: ltr; white-space: pre; }
+    .tok-tag  { color: #FF8A65; }
+    .tok-attr { color: #FFD082; }
+    .tok-val  { color: #79B8FF; }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 90px; font-size: 14.5px; font-weight: 600; cursor: pointer; border: 2px solid transparent; text-decoration: none; transition: all 0.15s; line-height: 1; }
+    .lang-ar .btn { font-family: var(--font-arabic); }
+    .lang-en .btn { font-family: var(--font-en); direction: ltr; }
+    .btn-primary   { background: var(--orange); color: var(--white); border-color: var(--orange); }
+    .btn-primary:hover { background: var(--orange-dark); border-color: var(--orange-dark); }
+    .btn-secondary { background: #FAF5F0; color: var(--ink-strong); border-color: var(--ink-strong); }
+    .btn-secondary:hover { background: var(--ink-strong); color: var(--white); }
+    .btn-ghost { background: transparent; color: var(--ink-strong); border-color: var(--ink-strong); }
+    .btn-ghost:hover { background: var(--orange-light); border-color: var(--orange); color: var(--orange-dark); }
+    .btn-ghost-white { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.45); }
+    .btn-ghost-white:hover { background: rgba(255,255,255,0.08); border-color: var(--white); }
+
+    .feature-card { background: var(--white); border: 1.5px solid var(--rule-grey); border-radius: var(--radius-lg); padding: 22px; max-width: 260px; box-shadow: var(--shadow); }
+    .feature-card-icon { width: 44px; height: 44px; background: var(--orange-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; color: var(--orange-dark); font-size: 20px; }
+    .feature-card-title-ar { font-family: var(--font-arabic); font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+    .feature-card-title-en { font-family: var(--font-en); font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 5px; direction: ltr; }
+    .feature-card-desc-ar { font-family: var(--font-arabic); font-size: 13px; color: var(--grey-1); line-height: 1.6; }
+    .feature-card-desc-en { font-family: var(--font-en); font-size: 12.5px; color: var(--grey-1); line-height: 1.6; direction: ltr; }
+
+    .stat-badge { background: var(--white); border: 1.5px solid var(--rule-grey); border-radius: var(--radius); padding: 14px 18px; min-width: 130px; box-shadow: var(--shadow); }
+    .stat-badge-label-ar { font-family: var(--font-arabic); font-size: 12px; color: var(--grey-2); margin-bottom: 3px; }
+    .stat-badge-label-en { font-family: var(--font-en); font-size: 11px; color: var(--grey-2); margin-bottom: 3px; direction: ltr; font-weight: 500; }
+    .stat-badge-value { font-family: var(--font-en); font-size: 24px; font-weight: 700; color: var(--ink-text); direction: ltr; line-height: 1; }
+    .stat-delta { font-family: var(--font-en); font-size: 12px; font-weight: 600; margin-top: 4px; direction: ltr; display: flex; align-items: center; gap: 3px; }
+    .stat-delta.up   { color: #2E7D32; }
+    .stat-delta.flat { color: var(--blue); }
+
+    .tag { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 100px; font-size: 12.5px; font-weight: 500; }
+    .lang-ar .tag { font-family: var(--font-arabic); }
+    .lang-en .tag { font-family: var(--font-en); direction: ltr; }
+    .tag-tint   { background: var(--orange-light); color: var(--orange-dark); border: 1px solid #F5C5A8; }
+    .tag-blue   { background: #E8F3FF; color: #1461B3; border: 1px solid #BFE0FF; }
+    .tag-dark   { background: var(--ink-strong); color: var(--white); }
+
+    .plain-divider { display: flex; align-items: center; gap: 10px; margin: 20px 0; }
+    .pd-line { flex: 1; height: 1px; background: var(--rule-grey); }
+    .pd-dot  { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); opacity: 0.4; }
+
+    /* ===========================
+       VOICE & TONE
+    =========================== */
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .voice-card { border-radius: var(--radius); padding: 20px 22px; border: 1px solid var(--rule-grey); }
+    .voice-card.do-v   { background: #FFF6F2; border-color: #FFCBB5; }
+    .voice-card.dont-v { background: #FFF8F8; border-color: #FFCDD2; }
+    .voice-quote-ar { font-family: var(--font-arabic); font-size: 14.5px; color: var(--ink-text); line-height: 1.75; margin-bottom: 8px; }
+    .voice-quote-en { font-family: var(--font-en); font-size: 13.5px; color: var(--ink-text); line-height: 1.75; margin-bottom: 8px; direction: ltr; }
+    .voice-note-ar { font-family: var(--font-arabic); font-size: 12px; color: var(--grey-2); }
+    .voice-note-en { font-family: var(--font-en); font-size: 11px; color: var(--grey-2); direction: ltr; }
+
+    .personality-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 8px; }
+    .personality-card { background: var(--orange-light); border: 1px solid var(--rule-grey); border-radius: var(--radius); padding: 18px 16px; text-align: center; }
+    .personality-icon { color: var(--orange-dark); font-size: 26px; margin-bottom: 8px; display: block; }
+    .personality-title-ar { font-family: var(--font-arabic); font-size: 15px; font-weight: 700; color: var(--ink); }
+    .personality-title-en { font-family: var(--font-en); font-size: 14px; font-weight: 700; color: var(--ink); direction: ltr; }
+    .personality-desc-ar { font-family: var(--font-arabic); font-size: 12px; color: var(--grey-1); margin-top: 4px; line-height: 1.5; }
+    .personality-desc-en { font-family: var(--font-en); font-size: 11px; color: var(--grey-1); margin-top: 4px; line-height: 1.5; direction: ltr; }
+
+    /* ===========================
+       COMBINATION SWATCHES
+    =========================== */
+    .combo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .combo-swatch { border-radius: var(--radius); padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; }
+    .combo-text-ar { font-family: var(--font-arabic); font-size: 15px; font-weight: 600; }
+    .combo-text-en { font-family: var(--font-en); font-size: 14px; font-weight: 600; direction: ltr; }
+    .combo-badge { font-family: var(--font-en); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; direction: ltr; letter-spacing: 0.04em; }
+
+    /* ===========================
+       SCROLL / PROGRESS
+    =========================== */
+    .progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--orange); transform-origin: left; transform: scaleX(0); z-index: 999; }
+
+    /* ===========================
+       UTILS
+    =========================== */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .mt-4 { margin-top: 16px; }
+
+    .ar-content { display: block; } .en-content { display: none; }
+    body.lang-en .ar-content { display: none; } body.lang-en .en-content { display: block; }
+    .ar-inline { display: inline; } .en-inline { display: none; }
+    body.lang-en .ar-inline { display: none; } body.lang-en .en-inline { display: inline; }
+
+    /* Footer */
+    .page-footer { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--rule-grey); display: flex; align-items: center; justify-content: space-between; }
+    .footer-brand-ar { font-family: var(--font-arabic); font-size: 16px; font-weight: 700; color: var(--ink); }
+    .footer-brand-en { font-family: var(--font-en); font-size: 15px; font-weight: 800; color: var(--ink); direction: ltr; letter-spacing: -0.02em; }
+    .footer-brand-ar span, .footer-brand-en span { color: var(--orange); }
+    .footer-sub { font-family: var(--font-en); font-size: 10px; color: var(--grey-2); margin-top: 2px; direction: ltr; letter-spacing: 0.04em; }
+    .footer-note { font-family: var(--font-en); font-size: 10px; color: var(--grey-3); direction: ltr; }
+
+    @media print {
+      .sidebar, .progress-bar { display: none; }
+      .main { padding: 24px; max-width: 100%; }
+    }
+  </style>
+</head>
+<body class="lang-ar">
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <img src="../assets/awn-mark-black.png" alt="Awn Agents" />
+    <div class="brand-name-ar ar-content">Awn <span>Agents</span></div>
+    <div class="brand-name-en en-content">Awn <span>Agents</span></div>
+    <div class="brand-sub">Brand Guidelines v1.0</div>
+  </div>
+  <nav>
+    <div class="nav-label">Sections</div>
+    <a class="nav-link active" href="#logo">
+      <i class="ti ti-layout-grid"></i>
+      <span class="ar-inline">اللوجو</span><span class="en-inline">Logo</span>
+    </a>
+    <a class="nav-link" href="#colors">
+      <i class="ti ti-palette"></i>
+      <span class="ar-inline">الألوان</span><span class="en-inline">Colors</span>
+    </a>
+    <a class="nav-link" href="#typography">
+      <i class="ti ti-typography"></i>
+      <span class="ar-inline">التايبوغرافي</span><span class="en-inline">Typography</span>
+    </a>
+    <a class="nav-link" href="#mark">
+      <i class="ti ti-vector-spline"></i>
+      <span class="ar-inline">العلامة</span><span class="en-inline">The Mark</span>
+    </a>
+    <a class="nav-link" href="#components">
+      <i class="ti ti-layout-cards"></i>
+      <span class="ar-inline">مكونات UI</span><span class="en-inline">UI Components</span>
+    </a>
+    <a class="nav-link" href="#voice">
+      <i class="ti ti-message-circle"></i>
+      <span class="ar-inline">الصوت والأسلوب</span><span class="en-inline">Voice & Tone</span>
+    </a>
+  </nav>
+
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('ar')">عربي</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-text">
+      <div class="cover-eyebrow">Brand Identity Document · v1.0</div>
+      <div class="cover-title-ar ar-content">Awn <span>Agents</span></div>
+      <div class="cover-title-en en-content">Awn <span>Agents</span></div>
+      <div class="cover-subtitle">AI Employees for Every Business</div>
+      <div class="cover-meta">July 2026 &nbsp;·&nbsp; For Designer & Internal Use</div>
+    </div>
+    <img class="cover-image" src="../assets/awn-mark-black.png" alt="Awn Agents mark" />
+  </div>
+
+  <!-- ===== 1. LOGO ===== -->
+  <section class="section" id="logo">
+    <div class="section-tag">01 — Logo</div>
+
+    <div class="ar-content">
+      <h1 class="section-title-ar">استخدام اللوجو</h1>
+      <p class="section-desc-ar">اللوجو هو خط واحد متصل بيرسم حروف AWN — بساطة، انسيابية، ومرونة. دايماً يُستخدم بالألوان والنسب الصحيحة.</p>
+    </div>
+    <div class="en-content">
+      <h1 class="section-title-en">Logo Usage</h1>
+      <p class="section-desc-en">The logo is a single continuous line forming the letters AWN — simplicity, fluidity, flexibility. Always used at correct colors and proportions.</p>
+    </div>
+    <div class="divider"></div>
+
+    <div class="approved-lockup">
+      <div class="approved-badge">
+        <i class="ti ti-circle-check-filled"></i>
+        <span class="ar-inline">اللوجو المعتمد</span><span class="en-inline">Approved Primary Lockup</span>
+      </div>
+      <img src="../assets/awn-logo-final.png" alt="Awn Agents — Approved Logo" />
+      <div class="approved-note">
+        <span class="ar-content">الرمز بالبرتقالي · كلمة "Agent" بالأسود · هي النسخة الرسمية اللي تُستخدم في كل المنصات.</span>
+        <span class="en-content">Orange mark · black "Agent" wordmark — this is the official version, used across every surface.</span>
+      </div>
+    </div>
+
+    <h3 class="sub">Logo on Backgrounds</h3>
+    <div class="logo-grid">
+      <div class="logo-card on-light">
+        <img src="../assets/awn-mark-black.png" alt="Awn Agents on white" />
+        <div class="logo-card-label">On White · Default</div>
+      </div>
+      <div class="logo-card on-paper">
+        <img src="../assets/awn-mark-black.png" alt="Awn Agents on paper" />
+        <div class="logo-card-label">On Paper · #FAF6F1</div>
+      </div>
+      <div class="logo-card on-tint">
+        <img src="../assets/awn-mark-black.png" alt="Awn Agents on tint" />
+        <div class="logo-card-label">On Light Tint · #FFEAE0</div>
+      </div>
+      <div class="logo-card on-dark">
+        <img src="../assets/awn-mark-black.png" alt="Awn Agents on dark" />
+        <div class="logo-card-label">On Ink · #18191B</div>
+      </div>
+      <div class="logo-card on-orange">
+        <img src="../assets/awn-mark-black.png" alt="Awn Agents on orange" />
+        <div class="logo-card-label">On Awn Orange · #FF3C00</div>
+      </div>
+      <div class="logo-card on-blue">
+        <img src="../assets/awn-mark-black.png" alt="Awn Agents on blue" />
+        <div class="logo-card-label">On Awn Blue · #2492FF</div>
+      </div>
+    </div>
+
+    <h3 class="sub">
+      <span class="ar-inline">تجربة ألوان العلامة —</span> Wordmark Color Combinations
+    </h3>
+    <p class="section-desc-ar ar-content" style="margin-top:-8px;font-size:13.5px;">
+      كل الاحتمالات الممكنة للون الرمز مع لون كلمة "Agent" — على أبيض وعلى الورق — قبل ما نقرر شكلها في الـ landing page.
+    </p>
+    <p class="section-desc-en en-content" style="margin-top:-8px;font-size:13px;">
+      Every possible pairing of mark color and "Agent" wordmark color — on white and on paper — before we lock in the landing page treatment.
+    </p>
+
+    <div class="wordmark-row-label">On White · #FFFFFF</div>
+    <div class="wordmark-grid">
+      <div class="wordmark-card bg-white">
+        <img src="../assets/awn-mark-orange.png" alt="Orange mark" />
+        <div class="wm-text" style="color:var(--orange);">Agent</div>
+        <div class="wm-label">Mark Orange · Word Orange</div>
+      </div>
+      <div class="wordmark-card bg-white">
+        <img src="../assets/awn-mark-orange.png" alt="Orange mark" />
+        <div class="wm-text" style="color:var(--ink-strong);">Agent</div>
+        <div class="wm-label">Mark Orange · Word Black</div>
+      </div>
+      <div class="wordmark-card bg-white">
+        <img src="../assets/awn-mark-black.png" alt="Black mark" />
+        <div class="wm-text" style="color:var(--orange);">Agent</div>
+        <div class="wm-label">Mark Black · Word Orange</div>
+      </div>
+      <div class="wordmark-card bg-white">
+        <img src="../assets/awn-mark-black.png" alt="Black mark" />
+        <div class="wm-text" style="color:var(--ink-strong);">Agent</div>
+        <div class="wm-label">Mark Black · Word Black</div>
+      </div>
+    </div>
+
+    <div class="wordmark-row-label">On Paper · #FAF6F1</div>
+    <div class="wordmark-grid">
+      <div class="wordmark-card bg-paper">
+        <img src="../assets/awn-mark-orange.png" alt="Orange mark" />
+        <div class="wm-text" style="color:var(--orange);">Agent</div>
+        <div class="wm-label">Mark Orange · Word Orange</div>
+      </div>
+      <div class="wordmark-card bg-paper">
+        <img src="../assets/awn-mark-orange.png" alt="Orange mark" />
+        <div class="wm-text" style="color:var(--ink-strong);">Agent</div>
+        <div class="wm-label">Mark Orange · Word Black</div>
+      </div>
+      <div class="wordmark-card bg-paper">
+        <img src="../assets/awn-mark-black.png" alt="Black mark" />
+        <div class="wm-text" style="color:var(--orange);">Agent</div>
+        <div class="wm-label">Mark Black · Word Orange</div>
+      </div>
+      <div class="wordmark-card bg-paper">
+        <img src="../assets/awn-mark-black.png" alt="Black mark" />
+        <div class="wm-text" style="color:var(--ink-strong);">Agent</div>
+        <div class="wm-label">Mark Black · Word Black</div>
+      </div>
+    </div>
+
+    <h3 class="sub">
+      <span class="ar-inline">تجربة تانية —</span> "Agent" Trailing the Last N
+    </h3>
+    <p class="section-desc-ar ar-content" style="margin-top:-8px;font-size:13.5px;">
+      نفس الاحتمالات، بس كلمة "Agent" مش في النص تحت الرمز — بتبدأ من غير ما ما آخر خط في حرف الـ N.
+    </p>
+    <p class="section-desc-en en-content" style="margin-top:-8px;font-size:13px;">
+      Same combinations, but "Agent" isn't centered under the mark — it starts right where the last N-stroke ends.
+    </p>
+
+    <div class="wordmark-row-label">On White · #FFFFFF</div>
+    <div class="wordmark-grid">
+      <div class="wordmark-card bg-white">
+        <span class="trail-lockup">
+          <img src="../assets/awn-mark-orange.png" alt="Orange mark" />
+          <span class="trail-text" style="color:var(--orange);">Agent</span>
+        </span>
+        <div class="wm-label" style="margin-top:32px;">Mark Orange · Word Orange</div>
+      </div>
+      <div class="wordmark-card bg-white">
+        <span class="trail-lockup">
+          <img src="../assets/awn-mark-orange.png" alt="Orange mark" />
+          <span class="trail-text" style="color:var(--ink-strong);">Agent</span>
+        </span>
+        <div class="wm-label" style="margin-top:32px;">Mark Orange · Word Black</div>
+      </div>
+      <div class="wordmark-card bg-white">
+        <span class="trail-lockup">
+          <img src="../assets/awn-mark-black.png" alt="Black mark" />
+          <span class="trail-text" style="color:var(--orange);">Agent</span>
+        </span>
+        <div class="wm-label" style="margin-top:32px;">Mark Black · Word Orange</div>
+      </div>
+      <div class="wordmark-card bg-white">
+        <span class="trail-lockup">
+          <img src="../assets/awn-mark-black.png" alt="Black mark" />
+          <span class="trail-text" style="color:var(--ink-strong);">Agent</span>
+        </span>
+        <div class="wm-label" style="margin-top:32px;">Mark Black · Word Black</div>
+      </div>
+    </div>
+
+    <div class="wordmark-row-label">On Paper · #FAF6F1</div>
+    <div class="wordmark-grid">
+      <div class="wordmark-card bg-paper">
+        <span class="trail-lockup">
+          <img src="../assets/awn-mark-orange.png" alt="Orange mark" />
+          <span class="trail-text" style="color:var(--orange);">Agent</span>
+        </span>
+        <div class="wm-label" style="margin-top:32px;">Mark Orange · Word Orange</div>
+      </div>
+      <div class="wordmark-card bg-paper">
+        <span class="trail-lockup">
+          <img src="../assets/awn-mark-orange.png" alt="Orange mark" />
+          <span class="trail-text" style="color:var(--ink-strong);">Agent</span>
+        </span>
+        <div class="wm-label" style="margin-top:32px;">Mark Orange · Word Black</div>
+      </div>
+      <div class="wordmark-card bg-paper">
+        <span class="trail-lockup">
+          <img src="../assets/awn-mark-black.png" alt="Black mark" />
+          <span class="trail-text" style="color:var(--orange);">Agent</span>
+        </span>
+        <div class="wm-label" style="margin-top:32px;">Mark Black · Word Orange</div>
+      </div>
+      <div class="wordmark-card bg-paper">
+        <span class="trail-lockup">
+          <img src="../assets/awn-mark-black.png" alt="Black mark" />
+          <span class="trail-text" style="color:var(--ink-strong);">Agent</span>
+        </span>
+        <div class="wm-label" style="margin-top:32px;">Mark Black · Word Black</div>
+      </div>
+    </div>
+
+    <h3 class="sub">Clear Space Rule</h3>
+    <div class="clearspace-demo">
+      <div class="clearspace-inner">
+        <span class="cs-label top">X min</span>
+        <span class="cs-label bottom">X min</span>
+        <span class="cs-label left">X</span>
+        <span class="cs-label right">X</span>
+        <img src="../assets/awn-mark-black.png" alt="Awn Agents clear space" />
+      </div>
+    </div>
+    <p class="section-desc-ar ar-content" style="margin-top:-8px;">
+      المسافة الحرة الدنيا = ارتفاع حرف "A" في الوردمارك. لا يُوضع أي عنصر داخل هذه المنطقة.
+    </p>
+    <p class="section-desc-en en-content" style="margin-top:-8px;">
+      Minimum clear space = height of the "A" in the wordmark on all sides. No element may enter this zone.
+    </p>
+
+    <h3 class="sub">
+      <span class="ar-inline">ما لا تفعله —</span> Don'ts
+    </h3>
+    <div class="donts-grid">
+      <div class="dont-card">
+        <img src="../assets/awn-mark-black.png" style="transform:scaleX(1.45);opacity:0.55;" alt="Don't stretch" />
+        <div class="dont-label">
+          <i class="ti ti-x" style="font-size:13px;"></i>
+          <span class="ar-inline">لا تمد أو تضغط</span>
+          <span class="en-inline">Don't stretch</span>
+        </div>
+      </div>
+      <div class="dont-card">
+        <img src="../assets/awn-mark-black.png" style="opacity:0.3;filter:grayscale(1) brightness(1.8);" alt="Don't recolor" />
+        <div class="dont-label">
+          <i class="ti ti-x" style="font-size:13px;"></i>
+          <span class="ar-inline">لا تستخدم رمادي</span>
+          <span class="en-inline">Don't recolor grey</span>
+        </div>
+      </div>
+      <div class="dont-card">
+        <img src="../assets/awn-mark-black.png" style="filter:drop-shadow(4px 4px 8px rgba(0,0,0,0.5));opacity:0.75;" alt="Don't add shadow" />
+        <div class="dont-label">
+          <i class="ti ti-x" style="font-size:13px;"></i>
+          <span class="ar-inline">لا تضيف ظل</span>
+          <span class="en-inline">Don't add shadow</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2. COLORS ===== -->
+  <section class="section" id="colors">
+    <div class="section-tag">02 — Colors</div>
+
+    <div class="ar-content">
+      <h1 class="section-title-ar">لوحة الألوان</h1>
+      <p class="section-desc-ar">ست ألوان محددة — ما يزيد، ما ينقص. اضغط على أي لون لنسخ الكود.</p>
+    </div>
+    <div class="en-content">
+      <h1 class="section-title-en">Color Palette</h1>
+      <p class="section-desc-en">Six defined colors — no more, no less. Click any swatch to copy the HEX code.</p>
+    </div>
+    <div class="divider"></div>
+
+    <div class="color-grid">
+      <div class="color-card" onclick="copyColor('#18191B', this)">
+        <div class="color-swatch" style="background:#18191B;">
+          <button class="copy-btn"><i class="ti ti-copy"></i> Copy HEX</button>
+        </div>
+        <div class="color-info">
+          <div class="color-name-ar ar-content">حبر غامق</div>
+          <div class="color-name-en">Ink · Primary</div>
+          <div class="color-hex">#18191B</div>
+          <div class="color-rgb">rgb(24, 25, 27)</div>
+          <div class="color-use-ar ar-content">العناوين · الأزرار الثانوية · الخلفيات الداكنة · النصوص</div>
+          <div class="color-use-en en-content">Headings · secondary buttons · dark backgrounds · body text</div>
+        </div>
+      </div>
+
+      <div class="color-card" onclick="copyColor('#FF3C00', this)">
+        <div class="color-swatch" style="background:#FF3C00;">
+          <button class="copy-btn"><i class="ti ti-copy"></i> Copy HEX</button>
+        </div>
+        <div class="color-info">
+          <div class="color-name-ar ar-content">برتقالي Awn</div>
+          <div class="color-name-en">Awn Orange · Accent</div>
+          <div class="color-hex">#FF3C00</div>
+          <div class="color-rgb">rgb(255, 60, 0)</div>
+          <div class="color-use-ar ar-content">الأزرار الأساسية · الروابط · اللوجو · نقاط التمييز</div>
+          <div class="color-use-en en-content">Primary buttons · links · logo accent · highlights</div>
+        </div>
+      </div>
+
+      <div class="color-card" onclick="copyColor('#FAF6F1', this)">
+        <div class="color-swatch" style="background:#FAF6F1;border-bottom:1px solid #E0DAD2;">
+          <button class="copy-btn" style="color:#444;background:rgba(0,0,0,0.08);"><i class="ti ti-copy"></i> Copy HEX</button>
+        </div>
+        <div class="color-info">
+          <div class="color-name-ar ar-content">أبيض كريمي</div>
+          <div class="color-name-en">Cream · Background</div>
+          <div class="color-hex">#FAF6F1</div>
+          <div class="color-rgb">rgb(250, 246, 241)</div>
+          <div class="color-use-ar ar-content">خلفية الصفحات والشاشات — دافئة، مش بيضاء ناصعة</div>
+          <div class="color-use-en en-content">Page & screen backgrounds — warm, not cold white</div>
+        </div>
+      </div>
+
+      <div class="color-card" onclick="copyColor('#FFB199', this)">
+        <div class="color-swatch" style="background:#FFB199;">
+          <button class="copy-btn" style="color:#444;background:rgba(0,0,0,0.08);"><i class="ti ti-copy"></i> Copy HEX</button>
+        </div>
+        <div class="color-info">
+          <div class="color-name-ar ar-content">خوخي</div>
+          <div class="color-name-en">Peach · Secondary</div>
+          <div class="color-hex">#FFB199</div>
+          <div class="color-rgb">rgb(255, 177, 153)</div>
+          <div class="color-use-ar ar-content">focus rings · لمسات ناعمة · الشارات الثانوية</div>
+          <div class="color-use-en en-content">Focus rings · soft accents · secondary badges</div>
+        </div>
+      </div>
+
+      <div class="color-card" onclick="copyColor('#2492FF', this)">
+        <div class="color-swatch" style="background:#2492FF;">
+          <button class="copy-btn"><i class="ti ti-copy"></i> Copy HEX</button>
+        </div>
+        <div class="color-info">
+          <div class="color-name-ar ar-content">أزرق Awn</div>
+          <div class="color-name-en">Awn Blue · Highlight</div>
+          <div class="color-hex">#2492FF</div>
+          <div class="color-rgb">rgb(36, 146, 255)</div>
+          <div class="color-use-ar ar-content">Awn Care · شارات المنتجات الثانوية · تنويع بصري</div>
+          <div class="color-use-en en-content">Awn Care badge · secondary product accents · visual variety</div>
+        </div>
+      </div>
+
+      <div class="color-card" onclick="copyColor('#EBE4DC', this)">
+        <div class="color-swatch" style="background:#EBE4DC;border-bottom:1px solid #D8CFC3;">
+          <button class="copy-btn" style="color:#444;background:rgba(0,0,0,0.08);"><i class="ti ti-copy"></i> Copy HEX</button>
+        </div>
+        <div class="color-info">
+          <div class="color-name-ar ar-content">رمادي الخطوط</div>
+          <div class="color-name-en">Rule Grey · Borders</div>
+          <div class="color-hex">#EBE4DC</div>
+          <div class="color-rgb">rgb(235, 228, 220)</div>
+          <div class="color-use-ar ar-content">الفواصل · حدود الكروت · الحدود الخفيفة</div>
+          <div class="color-use-en en-content">Dividers · card borders · subtle rules</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub">Approved Combinations</h3>
+    <div class="combo-grid">
+      <div class="combo-swatch" style="background:var(--ink-strong);">
+        <span class="combo-text-ar ar-content" style="color:white;">النص على الحبر</span>
+        <span class="combo-text-en en-content" style="color:white;">Text on Ink</span>
+        <span class="combo-badge" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);">AAA ✓</span>
+      </div>
+      <div class="combo-swatch" style="background:var(--orange);">
+        <span class="combo-text-ar ar-content" style="color:white;">النص على البرتقالي</span>
+        <span class="combo-text-en en-content" style="color:white;">Text on Orange</span>
+        <span class="combo-badge" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);">AA ✓</span>
+      </div>
+      <div class="combo-swatch" style="background:var(--orange-light);border:1px solid var(--rule-grey);">
+        <span class="combo-text-ar ar-content" style="color:var(--orange-dark);">البرتقالي على الفاتح</span>
+        <span class="combo-text-en en-content" style="color:var(--orange-dark);">Orange on Tint</span>
+        <span class="combo-badge" style="background:var(--rule-grey);color:var(--orange-dark);">AA ✓</span>
+      </div>
+      <div class="combo-swatch" style="background:var(--paper);border:1px solid var(--rule-grey);">
+        <span class="combo-text-ar ar-content" style="color:var(--ink-text);">الحبر على الورق</span>
+        <span class="combo-text-en en-content" style="color:var(--ink-text);">Ink on Paper</span>
+        <span class="combo-badge" style="background:var(--rule-grey);color:var(--ink);">AAA ✓</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. TYPOGRAPHY ===== -->
+  <section class="section" id="typography">
+    <div class="section-tag">03 — Typography</div>
+
+    <div class="ar-content">
+      <h1 class="section-title-ar">التايبوغرافي</h1>
+      <p class="section-desc-ar">خطّان اتنين فقط — واحد للعربي وواحد للإنجليزي. مفيش استثناءات.</p>
+    </div>
+    <div class="en-content">
+      <h1 class="section-title-en">Typography</h1>
+      <p class="section-desc-en">Two fonts only — one Arabic, one Latin. No exceptions.</p>
+    </div>
+    <div class="divider"></div>
+
+    <div class="font-pairing">
+      <div class="ar-content">
+        <div class="pairing-main-ar">وظف موظفين <span>AI</span> يشتغلوا معاك</div>
+        <div class="pairing-sub">IBM Plex Sans Arabic + IBM Plex Sans</div>
+      </div>
+      <div class="en-content">
+        <div class="pairing-main-en">Hire AI Employees That Work Like <span>Real Teammates</span></div>
+        <div class="pairing-sub">IBM Plex Sans — Bold 700 + Regular 400</div>
+      </div>
+    </div>
+
+    <div class="ar-content">
+      <div class="type-block mt-4">
+        <div class="type-block-header">
+          <div class="type-block-title">Arabic Type Scale</div>
+          <div class="type-tag">IBM Plex Sans Arabic</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-label">Display</div><div class="type-meta-size">48px · 700</div></div>
+          <div class="sample-ar" style="font-size:48px;font-weight:700;">Awn Agents</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-label">H1</div><div class="type-meta-size">36px · 700</div></div>
+          <div class="sample-ar" style="font-size:36px;font-weight:700;">وظف موظفين AI يشتغلوا معاك</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-label">H2</div><div class="type-meta-size">28px · 600</div></div>
+          <div class="sample-ar" style="font-size:28px;font-weight:600;">كل موظف متخصص في وظيفة واحدة</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-label">H3</div><div class="type-meta-size">22px · 600</div></div>
+          <div class="sample-ar" style="font-size:22px;font-weight:600;">تتكلم، إحنا نوثق</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-label">Body</div><div class="type-meta-size">16px · 400</div></div>
+          <div class="sample-ar" style="font-size:16px;">أدوات الذكاء الاصطناعي تساعدك على تنفيذ مهمة. أما Awn Agents فتمنحك موظفًا متخصصًا يقوم بالمهمة كاملة.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-label">Small</div><div class="type-meta-size">14px · 400</div></div>
+          <div class="sample-ar" style="font-size:14px;">فتحي للمحاسبة، وAwn Care للتوثيق الطبي</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-label">Caption</div><div class="type-meta-size">12px · 400</div></div>
+          <div class="sample-ar" style="font-size:12px;">آخر تحديث: يوليو 2026 · Awn Agents</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-block mt-4">
+      <div class="type-block-header">
+        <div class="type-block-title">Latin Type Scale</div>
+        <div class="type-tag">IBM Plex Sans</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-meta-label">Display</div><div class="type-meta-size">48px · 700</div></div>
+        <div class="sample-en" style="font-size:42px;font-weight:700;letter-spacing:-0.03em;">Awn Agents</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-meta-label">H1</div><div class="type-meta-size">36px · 700</div></div>
+        <div class="sample-en" style="font-size:33px;font-weight:700;letter-spacing:-0.025em;">Hire AI Employees</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-meta-label">H2</div><div class="type-meta-size">26px · 700</div></div>
+        <div class="sample-en" style="font-size:26px;font-weight:700;letter-spacing:-0.02em;">Every Agent, One Job</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-meta-label">H3</div><div class="type-meta-size">20px · 600</div></div>
+        <div class="sample-en" style="font-size:20px;font-weight:600;">You talk. We document.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-meta-label">Body</div><div class="type-meta-size">15px · 400</div></div>
+        <div class="sample-en" style="font-size:15px;">AI tools help you complete a task. Awn Agents gives you a specialized employee who owns the job, start to finish.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-meta-label">UI Label</div><div class="type-meta-size">11px · 700 CAPS</div></div>
+        <div class="sample-en" style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">AI Employees · Awn Agents</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-meta-label">Mono Data</div><div class="type-meta-size">14px · 700</div></div>
+        <div class="sample-en" style="font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;">24 / 7 &nbsp; Always On</div>
+      </div>
+    </div>
+
+    <h3 class="sub">Typography Rules</h3>
+    <div class="font-rules">
+      <div class="rule-card do">
+        <div class="rule-badge"><i class="ti ti-check" style="font-size:11px;"></i> Do</div>
+        <div class="rule-text-ar ar-content">كل النصوص العربية — عناوين وواجهة — بـ IBM Plex Sans Arabic بس</div>
+        <div class="rule-text-en en-content">All Arabic text — headings and UI — uses IBM Plex Sans Arabic only</div>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-badge"><i class="ti ti-x" style="font-size:11px;"></i> Don't</div>
+        <div class="rule-text-ar ar-content">لا تسيب المتصفح يرجع لخط النظام الافتراضي — حمّل الخط دايماً</div>
+        <div class="rule-text-en en-content">Don't let the browser fall back to a system font — always load the webfont</div>
+      </div>
+      <div class="rule-card do">
+        <div class="rule-badge"><i class="ti ti-check" style="font-size:11px;"></i> Do</div>
+        <div class="rule-text-ar ar-content">Labels الـ UI الإنجليزية كلها بـ IBM Plex Sans — وزن 600–700 للتمييز</div>
+        <div class="rule-text-en en-content">All English UI labels use IBM Plex Sans — weight 600–700 for emphasis</div>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-badge"><i class="ti ti-x" style="font-size:11px;"></i> Don't</div>
+        <div class="rule-text-ar ar-content">لا تخلط أكتر من خطين في نفس الواجهة — عربي + لاتيني كحد أقصى</div>
+        <div class="rule-text-en en-content">Never mix more than two typefaces in one interface — one Arabic + one Latin max</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. THE MARK ===== -->
+  <section class="section" id="mark">
+    <div class="section-tag">04 — The Mark</div>
+
+    <div class="ar-content">
+      <h1 class="section-title-ar">Awn — العلامة</h1>
+      <p class="section-desc-ar">مش مجرد اسم — العلامة نفسها رسالة. خط واحد متصل من غير قطع، بيرسم حروف AWN.</p>
+    </div>
+    <div class="en-content">
+      <h1 class="section-title-en">Awn — The Mark</h1>
+      <p class="section-desc-en">Not just a wordmark — the mark itself is a message. One unbroken line, drawing the letters AWN.</p>
+    </div>
+    <div class="divider"></div>
+
+    <div class="mascot-block">
+      <img src="../assets/awn-mark-orange.png" alt="Awn Agents mark" />
+      <div class="trait-list">
+        <div class="trait">
+          <i class="ti ti-wave-sine trait-icon"></i>
+          <div>
+            <div class="trait-text-ar ar-content"><span class="trait-bold">انسيابية:</span> خط واحد من غير انقطاع — اتصال طبيعي، مش أجزاء متفرقة مجمّعة مع بعض.</div>
+            <div class="trait-text-en en-content"><span class="trait-bold">Fluidity:</span> One unbroken line — a natural connection, not disjointed parts stitched together.</div>
+          </div>
+        </div>
+        <div class="trait">
+          <i class="ti ti-leaf trait-icon"></i>
+          <div>
+            <div class="trait-text-ar ar-content"><span class="trait-bold">بساطة:</span> هوية واضحة من غير زخرفة زيادة — سهلة التعرف عليها في أي حجم.</div>
+            <div class="trait-text-en en-content"><span class="trait-bold">Simplicity:</span> A clear identity with no extra ornament — recognizable at any size.</div>
+          </div>
+        </div>
+        <div class="trait">
+          <i class="ti ti-infinity trait-icon"></i>
+          <div>
+            <div class="trait-text-ar ar-content"><span class="trait-bold">مرونة:</span> نفس الخط بيتكيف مع كل تحدي — منتج جديد، سياق جديد، مقاس جديد.</div>
+            <div class="trait-text-en en-content"><span class="trait-bold">Flexibility:</span> The same line adapts to every challenge — a new product, context, or size.</div>
+          </div>
+        </div>
+        <div class="trait">
+          <i class="ti ti-palette trait-icon"></i>
+          <div>
+            <div class="trait-text-ar ar-content"><span class="trait-bold">الألوان المعتمدة:</span> برتقالي · أسود · أو الاتنين مع بعض — حسب السياق والخلفية.</div>
+            <div class="trait-text-en en-content"><span class="trait-bold">Approved colorways:</span> Orange · black · or both together — depending on context and background.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2 mt-4">
+      <div class="rule-card do">
+        <div class="rule-badge"><i class="ti ti-check" style="font-size:11px;"></i> Do</div>
+        <div class="rule-text-ar ar-content">استخدم ملفات اللوجو الأصلية دايماً — من غير إعادة رسم أو تتبّع</div>
+        <div class="rule-text-en en-content">Always use the original logo files — never redraw or re-trace the line</div>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-badge"><i class="ti ti-x" style="font-size:11px;"></i> Don't</div>
+        <div class="rule-text-ar ar-content">لا تفصل حروف "AWN" الصغيرة عن الرمز — دايماً وحدة واحدة</div>
+        <div class="rule-text-en en-content">Don't separate the small "AWN" letterforms from the mark — always one unit</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. UI COMPONENTS ===== -->
+  <section class="section" id="components">
+    <div class="section-tag">05 — UI Components</div>
+
+    <div class="ar-content">
+      <h1 class="section-title-ar">مكونات الـ UI</h1>
+      <p class="section-desc-ar">مكونات جاهزة للاستخدام — كل واحد معاه الكود اللي تنسخه مباشرةً.</p>
+    </div>
+    <div class="en-content">
+      <h1 class="section-title-en">UI Components</h1>
+      <p class="section-desc-en">Production-ready components with copy-paste HTML & CSS.</p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- BUTTONS -->
+    <div class="comp-section">
+      <div class="comp-label">Buttons</div>
+      <div class="comp-preview">
+        <button class="btn btn-primary">
+          <i class="ti ti-bolt"></i>
+          <span class="ar-inline">ابدأ الآن</span><span class="en-inline">Get Started</span>
+        </button>
+        <button class="btn btn-secondary">
+          <i class="ti ti-brand-whatsapp"></i>
+          <span class="ar-inline">تواصل معانا</span><span class="en-inline">Get in Touch</span>
+        </button>
+        <button class="btn btn-ghost">
+          <span class="ar-inline">اعرف أكتر</span><span class="en-inline">Learn More</span>
+          <i class="ti ti-arrow-left" style="font-size:14px;"></i>
+        </button>
+      </div>
+      <div class="comp-preview dark">
+        <button class="btn btn-ghost-white">
+          <span class="ar-inline">اعرف أكتر</span><span class="en-inline">Learn More</span>
+        </button>
+        <button class="btn btn-secondary">
+          <i class="ti ti-brand-whatsapp"></i>
+          <span class="ar-inline">تواصل معانا</span><span class="en-inline">Get in Touch</span>
+        </button>
+      </div>
+      <div class="comp-code">
+        <pre><span class="tok-tag">&lt;button</span> <span class="tok-attr">class</span>=<span class="tok-val">"btn btn-primary"</span><span class="tok-tag">&gt;</span>ابدأ الآن<span class="tok-tag">&lt;/button&gt;</span>
+<span class="tok-tag">&lt;button</span> <span class="tok-attr">class</span>=<span class="tok-val">"btn btn-secondary"</span><span class="tok-tag">&gt;</span>تواصل معانا<span class="tok-tag">&lt;/button&gt;</span>
+<span class="tok-tag">&lt;button</span> <span class="tok-attr">class</span>=<span class="tok-val">"btn btn-ghost"</span><span class="tok-tag">&gt;</span>اعرف أكتر<span class="tok-tag">&lt;/button&gt;</span>
+<span class="tok-tag">&lt;button</span> <span class="tok-attr">class</span>=<span class="tok-val">"btn btn-ghost-white"</span><span class="tok-tag">&gt;</span>اعرف أكتر<span class="tok-tag">&lt;/button&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- FEATURE CARD -->
+    <div class="comp-section">
+      <div class="comp-label">Feature Card</div>
+      <div class="comp-preview" style="align-items:flex-start;">
+        <div class="feature-card">
+          <div class="feature-card-icon"><i class="ti ti-microphone"></i></div>
+          <div class="feature-card-title-ar ar-content">تتكلم بشكل طبيعي</div>
+          <div class="feature-card-title-en en-content">Speak Naturally</div>
+          <div class="feature-card-desc-ar ar-content">قول اللي حصل، والـ Agent يفهم السياق ويوثقه تلقائياً.</div>
+          <div class="feature-card-desc-en en-content">Say what happened — the agent understands context and documents it automatically.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-icon"><i class="ti ti-file-check"></i></div>
+          <div class="feature-card-title-ar ar-content">يوثق ويرتب</div>
+          <div class="feature-card-title-en en-content">Documents & Organizes</div>
+          <div class="feature-card-desc-ar ar-content">من كلام لبيانات منظمة وتقارير جاهزة في ثوانٍ.</div>
+          <div class="feature-card-desc-en en-content">From speech to structured data and ready reports in seconds.</div>
+        </div>
+      </div>
+      <div class="comp-code">
+        <pre><span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"feature-card"</span><span class="tok-tag">&gt;</span>
+  <span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"feature-card-icon"</span><span class="tok-tag">&gt;</span>
+    <span class="tok-tag">&lt;i</span> <span class="tok-attr">class</span>=<span class="tok-val">"ti ti-microphone"</span><span class="tok-tag">&gt;&lt;/i&gt;</span>
+  <span class="tok-tag">&lt;/div&gt;</span>
+  <span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"feature-card-title-ar"</span><span class="tok-tag">&gt;</span>تتكلم بشكل طبيعي<span class="tok-tag">&lt;/div&gt;</span>
+  <span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"feature-card-desc-ar"</span><span class="tok-tag">&gt;</span>وصف الميزة.<span class="tok-tag">&lt;/div&gt;</span>
+<span class="tok-tag">&lt;/div&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- STAT BADGES -->
+    <div class="comp-section">
+      <div class="comp-label">Stat Badge</div>
+      <div class="comp-preview">
+        <div class="stat-badge">
+          <div class="stat-badge-label-ar ar-content">الوكلاء النشطين</div>
+          <div class="stat-badge-label-en en-content">Active Agents</div>
+          <div class="stat-badge-value">2</div>
+          <div class="stat-delta flat"><i class="ti ti-plus" style="font-size:13px;"></i> Growing</div>
+        </div>
+        <div class="stat-badge">
+          <div class="stat-badge-label-ar ar-content">وقت الاستجابة</div>
+          <div class="stat-badge-label-en en-content">Response Time</div>
+          <div class="stat-badge-value">Instant</div>
+          <div class="stat-delta up"><i class="ti ti-bolt" style="font-size:13px;"></i> 24/7</div>
+        </div>
+        <div class="stat-badge">
+          <div class="stat-badge-label-ar ar-content">طريقة الإدخال</div>
+          <div class="stat-badge-label-en en-content">Input Method</div>
+          <div class="stat-badge-value">Voice / Text</div>
+          <div class="stat-delta up"><i class="ti ti-microphone" style="font-size:13px;"></i> Natural</div>
+        </div>
+      </div>
+      <div class="comp-code">
+        <pre><span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"stat-badge"</span><span class="tok-tag">&gt;</span>
+  <span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"stat-badge-label-ar"</span><span class="tok-tag">&gt;</span>الوكلاء النشطين<span class="tok-tag">&lt;/div&gt;</span>
+  <span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"stat-badge-value"</span><span class="tok-tag">&gt;</span>2<span class="tok-tag">&lt;/div&gt;</span>
+  <span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"stat-delta up"</span><span class="tok-tag">&gt;</span>
+    <span class="tok-tag">&lt;i</span> <span class="tok-attr">class</span>=<span class="tok-val">"ti ti-bolt"</span><span class="tok-tag">&gt;&lt;/i&gt;</span> 24/7
+  <span class="tok-tag">&lt;/div&gt;</span>
+<span class="tok-tag">&lt;/div&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- TAGS -->
+    <div class="comp-section">
+      <div class="comp-label">Tags / Pills</div>
+      <div class="comp-preview">
+        <span class="tag tag-tint">
+          <i class="ti ti-calculator" style="font-size:13px;"></i>
+          <span class="ar-inline">فتحي</span><span class="en-inline">Fathi</span>
+        </span>
+        <span class="tag tag-blue">
+          <i class="ti ti-stethoscope" style="font-size:13px;"></i>
+          <span class="ar-inline">Awn Care</span><span class="en-inline">Awn Care</span>
+        </span>
+        <span class="tag tag-tint">
+          <i class="ti ti-star" style="font-size:13px;"></i>
+          <span class="ar-inline">جديد</span><span class="en-inline">New</span>
+        </span>
+        <span class="tag tag-blue">
+          <span class="ar-inline">قريباً</span><span class="en-inline">Coming Soon</span>
+        </span>
+        <span class="tag tag-dark">
+          <i class="ti ti-sparkles" style="font-size:13px;"></i>
+          <span class="ar-inline">Awn Agents</span><span class="en-inline">Awn Agents</span>
+        </span>
+      </div>
+      <div class="comp-code">
+        <pre><span class="tok-tag">&lt;span</span> <span class="tok-attr">class</span>=<span class="tok-val">"tag tag-tint"</span><span class="tok-tag">&gt;</span>
+  <span class="tok-tag">&lt;i</span> <span class="tok-attr">class</span>=<span class="tok-val">"ti ti-calculator"</span><span class="tok-tag">&gt;&lt;/i&gt;</span> فتحي
+<span class="tok-tag">&lt;/span&gt;</span>
+<span class="tok-tag">&lt;span</span> <span class="tok-attr">class</span>=<span class="tok-val">"tag tag-blue"</span><span class="tok-tag">&gt;</span>Awn Care<span class="tok-tag">&lt;/span&gt;</span>
+<span class="tok-tag">&lt;span</span> <span class="tok-attr">class</span>=<span class="tok-val">"tag tag-dark"</span><span class="tok-tag">&gt;</span>Awn Agents<span class="tok-tag">&lt;/span&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="comp-section">
+      <div class="comp-label">Divider</div>
+      <div class="comp-preview" style="flex-direction:column;align-items:stretch;">
+        <div class="plain-divider">
+          <div class="pd-line"></div>
+          <div class="pd-dot"></div>
+          <div class="pd-line"></div>
+        </div>
+        <div class="divider" style="margin:4px 0;"></div>
+      </div>
+      <div class="comp-code">
+        <pre><span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"plain-divider"</span><span class="tok-tag">&gt;</span>
+  <span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"pd-line"</span><span class="tok-tag">&gt;&lt;/div&gt;</span>
+  <span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"pd-dot"</span><span class="tok-tag">&gt;&lt;/div&gt;</span>
+  <span class="tok-tag">&lt;div</span> <span class="tok-attr">class</span>=<span class="tok-val">"pd-line"</span><span class="tok-tag">&gt;&lt;/div&gt;</span>
+<span class="tok-tag">&lt;/div&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- ICONS REFERENCE -->
+    <div class="comp-section">
+      <div class="comp-label">Icon Library — Tabler Icons</div>
+      <div class="comp-preview" style="flex-direction:column;align-items:flex-start;gap:20px;">
+        <div style="font-family:var(--font-en);font-size:12px;color:var(--grey-1);direction:ltr;line-height:1.8;">
+          <strong style="color:var(--ink);">Library:</strong> Tabler Icons (outline) — tabler.io/icons<br/>
+          <strong style="color:var(--ink);">CDN:</strong> @tabler/icons-webfont@latest<br/>
+          <strong style="color:var(--ink);">Rule:</strong> Never use emojis — always use Tabler icons instead.<br/>
+          <strong style="color:var(--ink);">Verify:</strong> Run curl check before using any icon name.
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;">
+          <div style="text-align:center;">
+            <i class="ti ti-microphone" style="font-size:24px;color:var(--ink);display:block;margin-bottom:4px;"></i>
+            <span style="font-family:var(--font-en);font-size:10px;color:var(--grey-2);direction:ltr;">microphone</span>
+          </div>
+          <div style="text-align:center;">
+            <i class="ti ti-file-check" style="font-size:24px;color:var(--ink);display:block;margin-bottom:4px;"></i>
+            <span style="font-family:var(--font-en);font-size:10px;color:var(--grey-2);direction:ltr;">file-check</span>
+          </div>
+          <div style="text-align:center;">
+            <i class="ti ti-calculator" style="font-size:24px;color:var(--ink);display:block;margin-bottom:4px;"></i>
+            <span style="font-family:var(--font-en);font-size:10px;color:var(--grey-2);direction:ltr;">calculator</span>
+          </div>
+          <div style="text-align:center;">
+            <i class="ti ti-stethoscope" style="font-size:24px;color:var(--ink);display:block;margin-bottom:4px;"></i>
+            <span style="font-family:var(--font-en);font-size:10px;color:var(--grey-2);direction:ltr;">stethoscope</span>
+          </div>
+          <div style="text-align:center;">
+            <i class="ti ti-brain" style="font-size:24px;color:var(--ink);display:block;margin-bottom:4px;"></i>
+            <span style="font-family:var(--font-en);font-size:10px;color:var(--grey-2);direction:ltr;">brain</span>
+          </div>
+          <div style="text-align:center;">
+            <i class="ti ti-chart-bar" style="font-size:24px;color:var(--ink);display:block;margin-bottom:4px;"></i>
+            <span style="font-family:var(--font-en);font-size:10px;color:var(--grey-2);direction:ltr;">chart-bar</span>
+          </div>
+          <div style="text-align:center;">
+            <i class="ti ti-brand-whatsapp" style="font-size:24px;color:var(--ink);display:block;margin-bottom:4px;"></i>
+            <span style="font-family:var(--font-en);font-size:10px;color:var(--grey-2);direction:ltr;">brand-whatsapp</span>
+          </div>
+          <div style="text-align:center;">
+            <i class="ti ti-shield-lock" style="font-size:24px;color:var(--ink);display:block;margin-bottom:4px;"></i>
+            <span style="font-family:var(--font-en);font-size:10px;color:var(--grey-2);direction:ltr;">shield-lock</span>
+          </div>
+          <div style="text-align:center;">
+            <i class="ti ti-message-circle" style="font-size:24px;color:var(--ink);display:block;margin-bottom:4px;"></i>
+            <span style="font-family:var(--font-en);font-size:10px;color:var(--grey-2);direction:ltr;">message-circle</span>
+          </div>
+          <div style="text-align:center;">
+            <i class="ti ti-sparkles" style="font-size:24px;color:var(--ink);display:block;margin-bottom:4px;"></i>
+            <span style="font-family:var(--font-en);font-size:10px;color:var(--grey-2);direction:ltr;">sparkles</span>
+          </div>
+        </div>
+      </div>
+      <div class="comp-code">
+        <pre><span class="tok-tag">&lt;!-- Add in &lt;head&gt; --&gt;</span>
+<span class="tok-tag">&lt;link</span> <span class="tok-attr">rel</span>=<span class="tok-val">"stylesheet"</span>
+      <span class="tok-attr">href</span>=<span class="tok-val">"https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"</span><span class="tok-tag">&gt;</span>
+
+<span class="tok-tag">&lt;!-- Use anywhere --&gt;</span>
+<span class="tok-tag">&lt;i</span> <span class="tok-attr">class</span>=<span class="tok-val">"ti ti-microphone"</span> <span class="tok-attr">style</span>=<span class="tok-val">"font-size:24px; color:#18191B;"</span><span class="tok-tag">&gt;&lt;/i&gt;</span>
+
+<span class="tok-tag">&lt;!-- Verify before use --&gt;</span>
+curl -s -o /dev/null -w "%{http_code}" \
+  "https://cdn.jsdelivr.net/npm/@tabler/icons@3.44.0/icons/outline/ICON-NAME.svg"
+<span class="tok-tag">&lt;!-- 200 = safe · 404 = find alternative --&gt;</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6. VOICE & TONE ===== -->
+  <section class="section" id="voice">
+    <div class="section-tag">06 — Voice & Tone</div>
+
+    <div class="ar-content">
+      <h1 class="section-title-ar">الصوت والأسلوب</h1>
+      <p class="section-desc-ar">Awn Agents بتتكلم زي شركة واثقة من نفسها — مباشرة ومختصرة، مش زي بروشور تسويقي.</p>
+    </div>
+    <div class="en-content">
+      <h1 class="section-title-en">Voice & Tone</h1>
+      <p class="section-desc-en">Awn Agents talks like a confident company — direct and concise, never like a marketing brochure.</p>
+    </div>
+    <div class="divider"></div>
+
+    <div class="voice-grid">
+      <div class="voice-card do-v">
+        <div class="rule-badge" style="background:#FFE0D0;color:var(--orange-dark);margin-bottom:10px;">
+          <i class="ti ti-check" style="font-size:11px;"></i>
+          <span class="ar-inline">إحنا بنقول</span><span class="en-inline">We say</span>
+        </div>
+        <div class="voice-quote-ar ar-content">"كل موظف AI عندنا بيعمل شغلانة واحدة، ويعملها صح."</div>
+        <div class="voice-quote-en en-content">"One agent. One job. Done right."</div>
+        <div class="voice-note-ar ar-content">مباشر · واثق · مفيش كلام زيادة</div>
+        <div class="voice-note-en en-content">Direct · confident · no filler</div>
+      </div>
+      <div class="voice-card dont-v">
+        <div class="rule-badge" style="background:#FFCDD2;color:#C62828;margin-bottom:10px;">
+          <i class="ti ti-x" style="font-size:11px;"></i>
+          <span class="ar-inline">إحنا ما بنقولش</span><span class="en-inline">We never say</span>
+        </div>
+        <div class="voice-quote-ar ar-content">"نحن نقدم لكم حلولاً مبتكرة قائمة على الذكاء الاصطناعي لتحسين كفاءة أعمالكم."</div>
+        <div class="voice-quote-en en-content">"We leverage cutting-edge AI solutions to optimize your business efficiency."</div>
+        <div class="voice-note-ar ar-content">رسمي جداً · كليشيهات · مفيهوش صوت</div>
+        <div class="voice-note-en en-content">Overly formal · jargon · no distinct voice</div>
+      </div>
+      <div class="voice-card do-v">
+        <div class="rule-badge" style="background:#FFE0D0;color:var(--orange-dark);margin-bottom:10px;">
+          <i class="ti ti-check" style="font-size:11px;"></i>
+          <span class="ar-inline">إحنا بنقول</span><span class="en-inline">We say</span>
+        </div>
+        <div class="voice-quote-ar ar-content">"مش هنقولك 'منصة'. إحنا بنقولك 'موظف'."</div>
+        <div class="voice-quote-en en-content">"We won't call it a platform. We call it an employee."</div>
+        <div class="voice-note-ar ar-content">بيفرّق نفسه عن التريند · واضح · شخصي</div>
+        <div class="voice-note-en en-content">Distances itself from the trend · clear · personal</div>
+      </div>
+      <div class="voice-card dont-v">
+        <div class="rule-badge" style="background:#FFCDD2;color:#C62828;margin-bottom:10px;">
+          <i class="ti ti-x" style="font-size:11px;"></i>
+          <span class="ar-inline">إحنا ما بنقولش</span><span class="en-inline">We never say</span>
+        </div>
+        <div class="voice-quote-ar ar-content">"منصتنا الذكية توفر تجربة مستخدم متكاملة عبر واجهة سهلة الاستخدام."</div>
+        <div class="voice-quote-en en-content">"Our smart platform delivers a seamless user experience through an intuitive interface."</div>
+        <div class="voice-note-ar ar-content">كلام عام يصلح لأي شركة — مش صوتنا</div>
+        <div class="voice-note-en en-content">Generic enough to fit any company — not our voice</div>
+      </div>
+    </div>
+
+    <h3 class="sub">Brand Personality</h3>
+    <div class="personality-grid">
+      <div class="personality-card">
+        <i class="ti ti-flag personality-icon"></i>
+        <div class="personality-title-ar ar-content">واثق</div>
+        <div class="personality-title-en en-content">Confident</div>
+        <div class="personality-desc-ar ar-content">بيقول رأيه من غير تردد أو حشو</div>
+        <div class="personality-desc-en en-content">States its position without hedging or filler</div>
+      </div>
+      <div class="personality-card">
+        <i class="ti ti-eye personality-icon"></i>
+        <div class="personality-title-ar ar-content">مباشر</div>
+        <div class="personality-title-en en-content">Direct</div>
+        <div class="personality-desc-ar ar-content">جملة واحدة واضحة أحسن من فقرة غامضة</div>
+        <div class="personality-desc-en en-content">One clear sentence beats a vague paragraph</div>
+      </div>
+      <div class="personality-card">
+        <i class="ti ti-users personality-icon"></i>
+        <div class="personality-title-ar ar-content">الإنسان أولاً</div>
+        <div class="personality-title-en en-content">Human First</div>
+        <div class="personality-desc-ar ar-content">الإنسان هو من يقود العمل، والذكاء الاصطناعي يساعده</div>
+        <div class="personality-desc-en en-content">Humans lead the work. AI assists</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="page-footer">
+      <div>
+        <div class="footer-brand-ar ar-content">Awn <span>Agents</span></div>
+        <div class="footer-brand-en en-content">Awn <span>Agents</span></div>
+        <div class="footer-sub">Brand Guidelines v1.0 · July 2026</div>
+      </div>
+      <div class="footer-note">For internal & designer use only</div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    document.querySelector('.sidebar').style.direction = lang === 'ar' ? 'rtl' : 'ltr';
+  }
+
+  function copyColor(hex, card) {
+    navigator.clipboard.writeText(hex).then(() => {
+      const btn = card.querySelector('.copy-btn');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="ti ti-check"></i> Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 1500);
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    document.getElementById('progressBar').style.transform = `scaleX(${pct})`;
+  });
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  sections.forEach(s =>
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const a = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { threshold: 0.25 }).observe(s)
+  );
+</script>
+</body>
+</html>

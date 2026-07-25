@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>مهام — خبّرني</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: 220px;
+      min-width: 220px;
+      background: #1a1a2e;
+      padding: 28px 0;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    #sidebar .logo {
+      text-align: center;
+      padding: 0 16px 24px;
+      border-bottom: 1px solid #2d2d4e;
+      margin-bottom: 16px;
+    }
+    #sidebar .logo h1 { font-size: 15px; color: #fff; font-weight: 700; }
+    #sidebar .logo p  { font-size: 11px; color: #8888aa; margin-top: 4px; }
+
+    #sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 20px;
+      color: #b0b0cc;
+      text-decoration: none;
+      font-size: 13.5px;
+      border-right: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    #sidebar nav a:hover,
+    #sidebar nav a.active {
+      color: #fff;
+      background: #23234a;
+      border-right-color: #4f8ef7;
+    }
+    #sidebar nav a .icon { font-size: 16px; }
+    #sidebar nav a .badge {
+      margin-right: auto;
+      background: #4f8ef7;
+      color: #fff;
+      font-size: 10px;
+      border-radius: 10px;
+      padding: 1px 7px;
+      font-weight: 700;
+    }
+    #sidebar nav a .badge.done { background: #27ae60; }
+
+    /* ── Main ── */
+    #main {
+      margin-right: 220px;
+      flex: 1;
+      padding: 36px 40px;
+    }
+
+    .page-header {
+      margin-bottom: 32px;
+    }
+    .page-header h2 { font-size: 22px; font-weight: 700; }
+    .page-header p  { color: #666; font-size: 13px; margin-top: 6px; }
+
+    /* ── Section ── */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ── Stats bar ── */
+    .stats {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 20px;
+      flex: 1;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07);
+      text-align: center;
+    }
+    .stat-card .num { font-size: 26px; font-weight: 700; color: #4f8ef7; }
+    .stat-card .num.done-num { color: #27ae60; }
+    .stat-card .lbl { font-size: 11px; color: #888; margin-top: 2px; }
+
+    /* ── Task list ── */
+    .task-list {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07);
+      overflow: hidden;
+    }
+    .task-list .list-header {
+      background: #f8f9fc;
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #888;
+      border-bottom: 1px solid #eee;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 20px;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-item:hover { background: #fafbff; }
+
+    .task-item input[type=checkbox] {
+      width: 18px; height: 18px;
+      accent-color: #4f8ef7;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .task-item .task-text {
+      font-size: 14px;
+      flex: 1;
+      transition: color 0.2s;
+    }
+    .task-item.done .task-text {
+      color: #aaa;
+      text-decoration: line-through;
+    }
+    .task-item .task-date {
+      font-size: 11px;
+      color: #bbb;
+      white-space: nowrap;
+    }
+
+    /* priority tags */
+    .tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .tag.high   { background: #fdecea; color: #c0392b; }
+    .tag.med    { background: #fef9e7; color: #d68910; }
+    .tag.low    { background: #eafaf1; color: #1e8449; }
+
+    /* ── Overview (all sections summary) ── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .overview-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07);
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    .overview-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,.1); }
+    .overview-card .card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .overview-card .card-icon { font-size: 22px; }
+    .overview-card .card-title { font-size: 15px; font-weight: 700; }
+    .progress-bar {
+      background: #eee;
+      border-radius: 10px;
+      height: 7px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #4f8ef7;
+      border-radius: 10px;
+      transition: width 0.4s;
+    }
+    .progress-fill.full { background: #27ae60; }
+    .overview-card .card-counts { font-size: 12px; color: #888; }
+
+    /* last updated */
+    #last-updated {
+      margin-top: 32px;
+      font-size: 11px;
+      color: #bbb;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<nav id="sidebar">
+  <div class="logo">
+    <h1>إحكيلي</h1>
+    <p>لوحة المهام</p>
+  </div>
+  <nav>
+    <a href="#" class="nav-link active" data-section="overview">
+      <span class="icon">🏠</span> نظرة عامة
+    </a>
+    <a href="#" class="nav-link" data-section="brand">
+      <span class="icon">🎨</span> البراند
+      <span class="badge" id="badge-brand"></span>
+    </a>
+    <a href="#" class="nav-link" data-section="marketing">
+      <span class="icon">📣</span> التسويق
+      <span class="badge" id="badge-marketing"></span>
+    </a>
+    <a href="#" class="nav-link" data-section="sales">
+      <span class="icon">💰</span> المبيعات
+      <span class="badge" id="badge-sales"></span>
+    </a>
+    <a href="#" class="nav-link" data-section="product">
+      <span class="icon">🛠️</span> المنتج
+      <span class="badge" id="badge-product"></span>
+    </a>
+    <a href="#" class="nav-link" data-section="operations">
+      <span class="icon">⚙️</span> العمليات
+      <span class="badge" id="badge-operations"></span>
+    </a>
+    <a href="#" class="nav-link" data-section="finance">
+      <span class="icon">💵</span> المالية
+      <span class="badge" id="badge-finance"></span>
+    </a>
+    <a href="#" class="nav-link" data-section="legal">
+      <span class="icon">🏛️</span> القانوني
+      <span class="badge" id="badge-legal"></span>
+    </a>
+  </nav>
+</nav>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main id="main">
+
+  <!-- ── Overview ── -->
+  <div class="section active" id="section-overview">
+    <div class="page-header">
+      <h2>نظرة عامة على المشروع</h2>
+      <p>اضغط على أي قسم عشان تتنقل للمهام بتاعته</p>
+    </div>
+    <div class="stats">
+      <div class="stat-card">
+        <div class="num" id="total-open">—</div>
+        <div class="lbl">مهام مفتوحة</div>
+      </div>
+      <div class="stat-card">
+        <div class="num done-num" id="total-done">—</div>
+        <div class="lbl">مهام منتهية</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="total-pct" style="color:#9b59b6">—</div>
+        <div class="lbl">نسبة الإنجاز</div>
+      </div>
+    </div>
+    <div class="overview-grid" id="overview-grid"></div>
+    <div id="last-updated"></div>
+  </div>
+
+  <!-- ── Brand ── -->
+  <div class="section" id="section-brand">
+    <div class="page-header">
+      <h2>🎨 البراند</h2>
+      <p>هوية المشروع البصرية والكلامية</p>
+    </div>
+    <div class="task-list">
+      <div class="list-header">المهام</div>
+      <div class="task-item" data-id="b1">
+        <input type="checkbox"> <span class="task-text">تحديد ألوان البراند (Color Palette)</span>
+        <span class="tag high">أولوية عالية</span>
+      </div>
+      <div class="task-item done" data-id="b2">
+        <input type="checkbox" checked> <span class="task-text">تصميم الـ Logo — اتاختار: شخصية فتحي + دفتر حسابات + موجة صوت</span>
+        <span class="task-date">✅ يونيو 2026</span>
+      </div>
+      <div class="task-item" data-id="b2b">
+        <input type="checkbox"> <span class="task-text">إضافة اسم البراند والـ tagline تحت اللوجو</span>
+        <span class="tag high">أولوية عالية</span>
+      </div>
+      <div class="task-item" data-id="b2c">
+        <input type="checkbox"> <span class="task-text">عمل نسخة مربعة للتليجرام وواتساب</span>
+        <span class="tag med">متوسط</span>
+      </div>
+      <div class="task-item done" data-id="b0">
+        <input type="checkbox" checked> <span class="task-text">اختيار اسم البراند — إحكيلي / Ehkili</span>
+        <span class="task-date">✅ يونيو 2026</span>
+      </div>
+      <div class="task-item" data-id="b3">
+        <input type="checkbox"> <span class="task-text">تحديد الاسم الإنجليزي الرسمي (Khabberni؟)</span>
+        <span class="tag med">متوسط</span>
+      </div>
+      <div class="task-item" data-id="b4">
+        <input type="checkbox"> <span class="task-text">كتابة الـ Brand Voice — إزاي بيتكلم البراند مع العملاء</span>
+        <span class="tag low">منخفض</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Marketing ── -->
+  <div class="section" id="section-marketing">
+    <div class="page-header">
+      <h2>📣 التسويق</h2>
+      <p>الوصول للعملاء المستهدفين وبناء الحضور الرقمي</p>
+    </div>
+    <div class="task-list">
+      <div class="list-header">المهام</div>
+      <div class="task-item" data-id="m1">
+        <input type="checkbox"> <span class="task-text">إنشاء صفحة LinkedIn للشركة</span>
+        <span class="tag high">أولوية عالية</span>
+      </div>
+      <div class="task-item" data-id="m2">
+        <input type="checkbox"> <span class="task-text">بناء Landing Page</span>
+        <span class="tag high">أولوية عالية</span>
+      </div>
+      <div class="task-item" data-id="m3">
+        <input type="checkbox"> <span class="task-text">تحديد الـ ICP (Ideal Customer Profile) بالتفصيل</span>
+        <span class="tag high">أولوية عالية</span>
+      </div>
+      <div class="task-item" data-id="m4">
+        <input type="checkbox"> <span class="task-text">تحديد قنوات التسويق المناسبة للسوق المصري</span>
+        <span class="tag med">متوسط</span>
+      </div>
+      <div class="task-item" data-id="m5">
+        <input type="checkbox"> <span class="task-text">كتابة أول محتوى تسويقي (post أو video script)</span>
+        <span class="tag low">منخفض</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Sales ── -->
+  <div class="section" id="section-sales">
+    <div class="page-header">
+      <h2>💰 المبيعات</h2>
+      <p>تحويل العملاء المحتملين لعملاء بيدفعوا</p>
+    </div>
+    <div class="task-list">
+      <div class="list-header">المهام</div>
+      <div class="task-item" data-id="s1">
+        <input type="checkbox"> <span class="task-text">تحويل زكي من free trial لعميل بيدفع — تحديد موعد وسعر</span>
+        <span class="tag high">أولوية عالية</span>
+      </div>
+      <div class="task-item" data-id="s2">
+        <input type="checkbox"> <span class="task-text">تحديد الـ 3 عملاء التاليين وكيفية الوصول إليهم</span>
+        <span class="tag high">أولوية عالية</span>
+      </div>
+      <div class="task-item" data-id="s3">
+        <input type="checkbox"> <span class="task-text">بناء Sales Script — إزاي بتكلم صاحب المشروع الصغير</span>
+        <span class="tag med">متوسط</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Product ── -->
+  <div class="section" id="section-product">
+    <div class="page-header">
+      <h2>🛠️ المنتج</h2>
+      <p>تطوير وتحسين النظام التقني</p>
+    </div>
+    <div class="task-list">
+      <div class="list-header">المهام</div>
+      <div class="task-item done" data-id="p1">
+        <input type="checkbox" checked> <span class="task-text">بناء MVP الأساسي (تسجيل صوت/نص + Google Sheets)</span>
+        <span class="task-date">✅ منجز</span>
+      </div>
+      <div class="task-item done" data-id="p2">
+        <input type="checkbox" checked> <span class="task-text">أول عميل حقيقي (زكي — مشغل خياطة)</span>
+        <span class="task-date">✅ منجز</span>
+      </div>
+      <div class="task-item" data-id="p3">
+        <input type="checkbox"> <span class="task-text">حل مشكلة الأمان — نقل API Keys لـ Environment Variables</span>
+        <span class="tag high">أولوية عالية</span>
+      </div>
+      <div class="task-item" data-id="p4">
+        <input type="checkbox"> <span class="task-text">تحديد المنصة نهائياً: تليجرام أم واتساب</span>
+        <span class="tag high">أولوية عالية</span>
+      </div>
+      <div class="task-item" data-id="p5">
+        <input type="checkbox"> <span class="task-text">أتمتة عملية الـ Onboarding (بدل الـ 8 خطوات اليدوية)</span>
+        <span class="tag med">متوسط</span>
+      </div>
+      <div class="task-item" data-id="p6">
+        <input type="checkbox"> <span class="task-text">إضافة feature: قراءة رصيد فوري ("رصيدي كام؟")</span>
+        <span class="tag med">متوسط</span>
+      </div>
+      <div class="task-item" data-id="p7">
+        <input type="checkbox"> <span class="task-text">إضافة feature: تقرير شهري أوتوماتيك</span>
+        <span class="tag low">منخفض</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Operations ── -->
+  <div class="section" id="section-operations">
+    <div class="page-header">
+      <h2>⚙️ العمليات</h2>
+      <p>إزاي الشركة بتشتغل من الداخل يوم بيوم</p>
+    </div>
+    <div class="task-list">
+      <div class="list-header">المهام</div>
+      <div class="task-item" data-id="o1">
+        <input type="checkbox"> <span class="task-text">بناء نظام Support للعملاء</span>
+        <span class="tag med">متوسط</span>
+      </div>
+      <div class="task-item" data-id="o2">
+        <input type="checkbox"> <span class="task-text">توثيق دليل الـ Onboarding للعميل الجديد</span>
+        <span class="tag med">متوسط</span>
+      </div>
+      <div class="task-item" data-id="o3">
+        <input type="checkbox"> <span class="task-text">تحديد SLA — في كام وقت بترد على مشكلة؟</span>
+        <span class="tag low">منخفض</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Finance ── -->
+  <div class="section" id="section-finance">
+    <div class="page-header">
+      <h2>💵 المالية</h2>
+      <p>أرقام الشركة وموديل الربح</p>
+    </div>
+    <div class="task-list">
+      <div class="list-header">المهام</div>
+      <div class="task-item" data-id="f1">
+        <input type="checkbox"> <span class="task-text">تحديد أسعار الباقات الـ 3 بأرقام حقيقية</span>
+        <span class="tag high">أولوية عالية</span>
+      </div>
+      <div class="task-item" data-id="f2">
+        <input type="checkbox"> <span class="task-text">حساب Unit Economics (تكلفة العميل vs. إيراده)</span>
+        <span class="tag med">متوسط</span>
+      </div>
+      <div class="task-item" data-id="f3">
+        <input type="checkbox"> <span class="task-text">توقع Cash Flow لأول 12 شهر</span>
+        <span class="tag low">منخفض</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Legal ── -->
+  <div class="section" id="section-legal">
+    <div class="page-header">
+      <h2>🏛️ القانوني والرسمي</h2>
+      <p>الإطار القانوني للشركة في مصر</p>
+    </div>
+    <div class="task-list">
+      <div class="list-header">المهام</div>
+      <div class="task-item" data-id="l1">
+        <input type="checkbox"> <span class="task-text">تحديد الشكل القانوني المناسب للشركة في مصر</span>
+        <span class="tag med">متوسط</span>
+      </div>
+      <div class="task-item" data-id="l2">
+        <input type="checkbox"> <span class="task-text">معرفة متطلبات التسجيل والتوقيت المناسب</span>
+        <span class="tag low">منخفض</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════════ SCRIPT ══════════════ -->
+<script>
+  const STORAGE_KEY = 'smart_acc_tasks';
+
+  // ── sections config ──
+  const sections = [
+    { id: 'brand',      label: 'البراند',   icon: '🎨' },
+    { id: 'marketing',  label: 'التسويق',   icon: '📣' },
+    { id: 'sales',      label: 'المبيعات',  icon: '💰' },
+    { id: 'product',    label: 'المنتج',    icon: '🛠️' },
+    { id: 'operations', label: 'العمليات',  icon: '⚙️' },
+    { id: 'finance',    label: 'المالية',   icon: '💵' },
+    { id: 'legal',      label: 'القانوني',  icon: '🏛️' },
+  ];
+
+  // ── load saved state ──
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch { return {}; }
+  }
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  // ── apply saved checkboxes ──
+  const state = loadState();
+  document.querySelectorAll('.task-item').forEach(item => {
+    const id = item.dataset.id;
+    const cb = item.querySelector('input[type=checkbox]');
+    if (state[id] !== undefined) {
+      cb.checked = state[id];
+      item.classList.toggle('done', state[id]);
+    }
+    cb.addEventListener('change', () => {
+      item.classList.toggle('done', cb.checked);
+      state[id] = cb.checked;
+      saveState(state);
+      updateAll();
+    });
+    item.addEventListener('click', e => {
+      if (e.target !== cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); }
+    });
+  });
+
+  // ── count tasks per section ──
+  function countSection(sectionId) {
+    const el = document.getElementById('section-' + sectionId);
+    const items = el ? el.querySelectorAll('.task-item') : [];
+    let total = 0, done = 0;
+    items.forEach(i => { total++; if (i.classList.contains('done')) done++; });
+    return { total, done, open: total - done };
+  }
+
+  // ── update badges + overview ──
+  function updateAll() {
+    let grandTotal = 0, grandDone = 0;
+    const grid = document.getElementById('overview-grid');
+    grid.innerHTML = '';
+
+    sections.forEach(s => {
+      const { total, done, open } = countSection(s.id);
+      grandTotal += total; grandDone += done;
+
+      // badge
+      const badge = document.getElementById('badge-' + s.id);
+      if (badge) {
+        badge.textContent = open > 0 ? open : '✓';
+        badge.className = 'badge' + (open === 0 ? ' done' : '');
+      }
+
+      // overview card
+      const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+      const card = document.createElement('div');
+      card.className = 'overview-card';
+      card.innerHTML = `
+        <div class="card-top">
+          <span class="card-icon">${s.icon}</span>
+          <span class="card-title">${s.label}</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill${pct===100?' full':''}" style="width:${pct}%"></div>
+        </div>
+        <div class="card-counts">${done} من ${total} مهمة منتهية — ${pct}%</div>
+      `;
+      card.addEventListener('click', () => navigate(s.id));
+      grid.appendChild(card);
+    });
+
+    // totals
+    document.getElementById('total-open').textContent = grandTotal - grandDone;
+    document.getElementById('total-done').textContent = grandDone;
+    const pct = grandTotal > 0 ? Math.round((grandDone / grandTotal) * 100) : 0;
+    document.getElementById('total-pct').textContent = pct + '%';
+
+    // last updated
+    document.getElementById('last-updated').textContent =
+      'آخر تحديث: ' + new Date().toLocaleString('ar-EG');
+  }
+
+  // ── navigation ──
+  function navigate(sectionId) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+    document.getElementById('section-' + sectionId).classList.add('active');
+    document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  document.querySelectorAll('.nav-link').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      navigate(a.dataset.section);
+    });
+  });
+
+  // ── init ──
+  updateAll();
+</script>
+</body>
+</html>

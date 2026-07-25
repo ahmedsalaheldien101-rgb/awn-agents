@@ -1,0 +1,9 @@
+.DS_Store
+__MACOSX/
+Thumbs.db
+*.git-standalone-backup/
+
+# Personal / non-project files — keep out of a public repo
+Awn Agent.zip
+fathi/Mahmoud_Khaled_CV.docx.docx
+fathi/.claude/

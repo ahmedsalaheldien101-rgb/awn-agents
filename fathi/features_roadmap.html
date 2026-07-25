@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فتحي ميزانية — Product Roadmap</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .hero {
+      background: linear-gradient(135deg, #1a1f2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 60px 40px;
+      text-align: center;
+      border-bottom: 1px solid #2d3748;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 60% 40%, rgba(99, 179, 237, 0.05) 0%, transparent 60%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(99, 179, 237, 0.1);
+      border: 1px solid rgba(99, 179, 237, 0.3);
+      color: #63b3ed;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff 0%, #63b3ed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Baseline */
+    .baseline {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      border-radius: 12px;
+      padding: 20px 28px;
+      margin: 40px auto;
+      max-width: 900px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .baseline-icon { font-size: 1.8rem; }
+    .baseline-text strong { color: #fc8181; display: block; margin-bottom: 4px; font-size: 1rem; }
+    .baseline-text span { color: #94a3b8; font-size: 0.9rem; }
+
+    /* Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 30px 60px; }
+
+    /* Section headers */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 50px 0 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #2d3748;
+    }
+    .section-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .section-title h2 { font-size: 1.4rem; font-weight: 600; }
+    .section-title .section-meta { color: #64748b; font-size: 0.85rem; margin-top: 3px; }
+
+    /* Color themes per section */
+    .theme-blue .section-icon { background: rgba(99, 179, 237, 0.15); }
+    .theme-blue h2 { color: #63b3ed; }
+    .theme-green .section-icon { background: rgba(72, 187, 120, 0.15); }
+    .theme-green h2 { color: #48bb78; }
+    .theme-orange .section-icon { background: rgba(246, 173, 85, 0.15); }
+    .theme-orange h2 { color: #f6ad55; }
+    .theme-purple .section-icon { background: rgba(159, 122, 234, 0.15); }
+    .theme-purple h2 { color: #9f7aea; }
+    .theme-pink .section-icon { background: rgba(246, 135, 179, 0.15); }
+    .theme-pink h2 { color: #f687b3; }
+    .theme-teal .section-icon { background: rgba(79, 209, 197, 0.15); }
+    .theme-teal h2 { color: #4fd1c5; }
+
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 14px;
+    }
+
+    .feature-card {
+      background: #1a202c;
+      border: 1px solid #2d3748;
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card:hover {
+      border-color: #4a5568;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 3px; height: 100%;
+      border-radius: 0 12px 12px 0;
+    }
+    .theme-blue .feature-card::before { background: #63b3ed; }
+    .theme-green .feature-card::before { background: #48bb78; }
+    .theme-orange .feature-card::before { background: #f6ad55; }
+    .theme-purple .feature-card::before { background: #9f7aea; }
+    .theme-pink .feature-card::before { background: #f687b3; }
+    .theme-teal .feature-card::before { background: #4fd1c5; }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .card-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .theme-blue .card-num { background: rgba(99,179,237,0.15); color: #63b3ed; }
+    .theme-green .card-num { background: rgba(72,187,120,0.15); color: #48bb78; }
+    .theme-orange .card-num { background: rgba(246,173,85,0.15); color: #f6ad55; }
+    .theme-purple .card-num { background: rgba(159,122,234,0.15); color: #9f7aea; }
+    .theme-pink .card-num { background: rgba(246,135,179,0.15); color: #f687b3; }
+    .theme-teal .card-num { background: rgba(79,209,197,0.15); color: #4fd1c5; }
+
+    .card-title { font-size: 0.95rem; font-weight: 600; color: #e2e8f0; line-height: 1.4; }
+    .card-user { color: #64748b; font-size: 0.82rem; margin-bottom: 6px; font-style: italic; }
+    .card-reply {
+      background: #0f1117;
+      border: 1px solid #2d3748;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+    .card-reply .reply-label {
+      font-size: 0.72rem;
+      color: #48bb78;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    /* Timeline */
+    .timeline { position: relative; padding-right: 30px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      right: 8px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, #63b3ed, #9f7aea, #48bb78, #f6ad55);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 32px;
+      padding-right: 30px;
+    }
+    .timeline-dot {
+      position: absolute;
+      right: -8px;
+      top: 6px;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 3px solid #0f1117;
+      z-index: 1;
+    }
+    .timeline-item:nth-child(1) .timeline-dot { background: #63b3ed; }
+    .timeline-item:nth-child(2) .timeline-dot { background: #9f7aea; }
+    .timeline-item:nth-child(3) .timeline-dot { background: #48bb78; }
+    .timeline-item:nth-child(4) .timeline-dot { background: #f6ad55; }
+
+    .timeline-month {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .timeline-item:nth-child(1) .timeline-month { color: #63b3ed; }
+    .timeline-item:nth-child(2) .timeline-month { color: #9f7aea; }
+    .timeline-item:nth-child(3) .timeline-month { color: #48bb78; }
+    .timeline-item:nth-child(4) .timeline-month { color: #f6ad55; }
+
+    .timeline-card {
+      background: #1a202c;
+      border: 1px solid #2d3748;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .timeline-card h3 { font-size: 1rem; margin-bottom: 12px; color: #e2e8f0; }
+    .timeline-phases { display: flex; flex-direction: column; gap: 10px; }
+    .phase-item {
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .phase-week {
+      font-size: 0.72rem; font-weight: 700;
+      padding: 3px 8px; border-radius: 6px;
+      flex-shrink: 0; margin-top: 1px;
+      white-space: nowrap;
+    }
+    .timeline-item:nth-child(1) .phase-week { background: rgba(99,179,237,0.12); color: #63b3ed; }
+    .timeline-item:nth-child(2) .phase-week { background: rgba(159,122,234,0.12); color: #9f7aea; }
+    .timeline-item:nth-child(3) .phase-week { background: rgba(72,187,120,0.12); color: #48bb78; }
+    .timeline-item:nth-child(4) .phase-week { background: rgba(246,173,85,0.12); color: #f6ad55; }
+
+    .phase-content { font-size: 0.88rem; color: #94a3b8; line-height: 1.5; }
+    .phase-content strong { color: #e2e8f0; }
+    .phase-content ul { margin: 4px 0 0 0; padding-right: 16px; }
+    .phase-content li { margin-bottom: 2px; }
+    .phase-tech {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: #4a5568;
+      font-family: monospace;
+      background: #0f1117;
+      padding: 4px 8px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    /* Priority Table */
+    .priority-table { width: 100%; border-collapse: collapse; }
+    .priority-table th {
+      background: #1a202c;
+      color: #94a3b8;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 12px 16px;
+      text-align: right;
+      border-bottom: 1px solid #2d3748;
+    }
+    .priority-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #1a202c;
+      font-size: 0.88rem;
+      color: #e2e8f0;
+    }
+    .priority-table tr:hover td { background: #1a202c; }
+    .stars { color: #f6ad55; letter-spacing: 2px; }
+    .diff-badge {
+      padding: 3px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 600;
+    }
+    .diff-easy { background: rgba(72,187,120,0.15); color: #48bb78; }
+    .diff-med { background: rgba(246,173,85,0.15); color: #f6ad55; }
+    .diff-hard { background: rgba(239,68,68,0.15); color: #fc8181; }
+    .diff-very-hard { background: rgba(159,122,234,0.15); color: #9f7aea; }
+    .priority-badge {
+      padding: 3px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 700;
+    }
+    .p1 { background: rgba(239,68,68,0.15); color: #fc8181; }
+    .p2 { background: rgba(246,173,85,0.15); color: #f6ad55; }
+    .p3 { background: rgba(72,187,120,0.15); color: #48bb78; }
+    .p4 { background: rgba(99,179,237,0.15); color: #63b3ed; }
+
+    /* Alert box */
+    .alert-box {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .alert-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .alert-text h3 { color: #fc8181; margin-bottom: 6px; font-size: 0.95rem; }
+    .alert-text p { color: #94a3b8; font-size: 0.88rem; line-height: 1.6; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 1.8rem; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 16px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">PRODUCT ROADMAP</div>
+  <h1>فتحي ميزانية</h1>
+  <p>خطة تطوير الميزات الكاملة — من تسجيل العمليات لمحاسب ذكي فعلي</p>
+</div>
+
+<div class="container">
+
+  <!-- Baseline -->
+  <div class="baseline">
+    <div class="baseline-icon">📍</div>
+    <div class="baseline-text">
+      <strong>الوضع الحالي — تسجيل فقط</strong>
+      <span>البوت يستقبل عملية مالية ويكتبها في اليوميات. لا يرد على أسئلة، لا يبعت تقارير، لا ينبّه. كل التقارير موجودة في الشيت لكن خالد مش قادر يوصلها من تليجرام.</span>
+    </div>
+  </div>
+
+  <!-- A: Query Mode -->
+  <div class="section-title theme-blue">
+    <div class="section-icon">💬</div>
+    <div>
+      <h2>A — الرد على الأسئلة (Query Mode)</h2>
+      <div class="section-meta">الأولوية الأولى · أعلى قيمة فورية · صعوبة متوسطة</div>
+    </div>
+  </div>
+  <div class="feature-grid theme-blue">
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A1</span><span class="card-title">رصيد الصندوق الحالي</span></div>
+      <div class="card-user">👤 "كام في الصندوق دلوقتي؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>الكاش عندك دلوقتي 39,651 دينار ✅</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A2</span><span class="card-title">صافي ربح الشهر</span></div>
+      <div class="card-user">👤 "كسبت كام الشهر ده؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>إيرادات: 15,378 — مصاريف: 17,827 — صافي: 🔴 -2,449 دينار</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A3</span><span class="card-title">إجمالي المصاريف وتوزيعها</span></div>
+      <div class="card-user">👤 "مصاريفي الشهر ده كام؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>إجمالي: 17,827 دينار — أكبر بند: مرتبات 6,400 ثم إيجار 3,500</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A4</span><span class="card-title">أكبر 3 بنود مصاريف</span></div>
+      <div class="card-user">👤 "إيه أكبر مصروف عندي؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>1. مرتبات 6,400 · 2. إيجار 3,500 · 3. استراس 2,500</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A5</span><span class="card-title">قائمة العملاء المدينين</span></div>
+      <div class="card-user">👤 "مين بيدين؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>📋 ابو عدنان: 2,117 · محمد مراد: 600 · يوسف ابو عنزه: (تسوية)</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A6</span><span class="card-title">رصيد عميل معين</span></div>
+      <div class="card-user">👤 "النجار بيدين بكام؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>النجار: أوامر 19,239 — مدفوع 19,239 ✅ مش بيدين حاجة</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A7</span><span class="card-title">مقارنة شهرين</span></div>
+      <div class="card-user">👤 "الشهر ده أحسن من اللي فات؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>مايو: 15,378 — أبريل: 12,900 — 📈 تحسن 19%</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A8</span><span class="card-title">إحصائيات العملاء</span></div>
+      <div class="card-user">👤 "كام عميل عندي؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>7 عملاء إجمالي، 5 عملاء نشطين، 2 عندهم رصيد معلّق</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A9</span><span class="card-title">إنتاج خياط معين</span></div>
+      <div class="card-user">👤 "أبو شريف اشتغل كام قطعة الأسبوع ده؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>أبو شريف: 215 قطعة هذا الأسبوع — أجرة: 290 دينار</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A10</span><span class="card-title">إجمالي مرتبات الأسبوع</span></div>
+      <div class="card-user">👤 "مرتبات الأسبوع ده هتبقى كام؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>إجمالي الأجور هذا الأسبوع: 1,834 دينار (خياطين + كواة)</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A11</span><span class="card-title">التحقق من دفعة محددة</span></div>
+      <div class="card-user">👤 "دفعت إيجار الشهر ده؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>✅ نعم، دفعت إيجار المشغل 1 يونيو بمبلغ 1,200 دينار</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">A12</span><span class="card-title">آخر العمليات المسجّلة</span></div>
+      <div class="card-user">👤 "آخر 5 عمليات سجّلتها إيه؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>يعرض آخر 5 صفوف من اليوميات مع التاريخ والمبلغ</div>
+    </div>
+  </div>
+
+  <!-- B: Scheduled Reports -->
+  <div class="section-title theme-green">
+    <div class="section-icon">📅</div>
+    <div>
+      <h2>B — تقارير دورية تلقائية (Scheduled Reports)</h2>
+      <div class="section-meta">البوت يبعت بدون طلب · سهلة التنفيذ · قيمة عالية</div>
+    </div>
+  </div>
+  <div class="feature-grid theme-green">
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">B1</span><span class="card-title">ملخص نهاية اليوم</span></div>
+      <div class="card-user">🕘 كل يوم الساعة 9 مساءً</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرسالة:</span>📊 ملخص اليوم — دخل: 2,500 · مصروف: 850 · صافي: +1,650 · الصندوق: 39,651</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">B2</span><span class="card-title">تقرير أسبوعي</span></div>
+      <div class="card-user">🕖 كل جمعة الساعة 7 مساءً</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرسالة:</span>الأسبوع: إيراد 8,200 — مصروف 6,100 — مقارنة بالأسبوع السابق: 📈 +12%</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">B3</span><span class="card-title">تقرير شهري كامل</span></div>
+      <div class="card-user">📆 أول يوم كل شهر</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرسالة:</span>قائمة دخل مايو: إيراد 15,378 — مصروف 17,827 — صافي -2,449 + مقارنة بأبريل</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">B4</span><span class="card-title">تقرير ديون أسبوعي</span></div>
+      <div class="card-user">🕗 كل أحد صباحاً</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرسالة:</span>📋 الديون المعلّقة: ابو عدنان 2,117 · محمد مراد 600 · الإجمالي: 2,717</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">B5</span><span class="card-title">كشف مرتبات أسبوعي</span></div>
+      <div class="card-user">🕖 كل جمعة مساءً</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرسالة:</span>💰 مرتبات الأسبوع: أبو شريف 290 · سوجان 311 · أمنه 260 — الإجمالي: 1,834</div>
+    </div>
+  </div>
+
+  <!-- C: Smart Alerts -->
+  <div class="section-title theme-orange">
+    <div class="section-icon">🔔</div>
+    <div>
+      <h2>C — تنبيهات ذكية (Smart Alerts)</h2>
+      <div class="section-meta">يتنبّه لوحده لما في مشكلة · صعوبة متوسطة</div>
+    </div>
+  </div>
+  <div class="feature-grid theme-orange">
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">C1</span><span class="card-title">تنبيه انخفاض الكاش</span></div>
+      <div class="card-user">⚡ لو الصندوق نزل تحت حد معين</div>
+      <div class="card-reply"><span class="reply-label">🤖 التنبيه:</span>⚠️ تنبيه: الكاش نزل لـ 2,800 دينار — خد بالك من المصاريف الجاية</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">C2</span><span class="card-title">تنبيه الديون القديمة</span></div>
+      <div class="card-user">⚡ لو عميل بيدين من أكتر من 30 يوم</div>
+      <div class="card-reply"><span class="reply-label">🤖 التنبيه:</span>📌 ابو عدنان دباس عنده 2,117 دينار من 35 يوم — هتحصّل؟</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">C3</span><span class="card-title">تنبيه زيادة المصاريف</span></div>
+      <div class="card-user">⚡ لو المصاريف زادت أكتر من 15% عن الشهر السابق</div>
+      <div class="card-reply"><span class="reply-label">🤖 التنبيه:</span>📈 مصاريفك الشهر ده زادت 23% عن الشهر اللي فات (17,827 vs 14,490)</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">C4</span><span class="card-title">تنبيه عدم التسجيل</span></div>
+      <div class="card-user">⚡ مفيش عمليات مسجّلة من 3 أيام</div>
+      <div class="card-reply"><span class="reply-label">🤖 التنبيه:</span>👋 مرّت 3 أيام من غير تسجيل — كل حاجة تمام في المشغل؟</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">C5</span><span class="card-title">تنبيه اقتراب الإيجار</span></div>
+      <div class="card-user">⚡ كل شهر يوم 25</div>
+      <div class="card-reply"><span class="reply-label">🤖 التنبيه:</span>📅 إيجار المشغل موعده قرب — آخر مرة دفعته كانت 1 مايو</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">C6</span><span class="card-title">تنبيه ربحية سالبة</span></div>
+      <div class="card-user">⚡ لو صافي ربح الشهر سالب</div>
+      <div class="card-reply"><span class="reply-label">🤖 التنبيه:</span>🔴 الشهر ده المصاريف أكتر من الإيرادات بـ 2,449 دينار — محتاج مراجعة</div>
+    </div>
+  </div>
+
+  <!-- D: Visual Reports -->
+  <div class="section-title theme-purple">
+    <div class="section-icon">📊</div>
+    <div>
+      <h2>D — تقارير بصرية (Visual Reports)</h2>
+      <div class="section-meta">Charts وصور على تليجرام · صعوبة متوسطة-عالية · عبر QuickChart.io</div>
+    </div>
+  </div>
+  <div class="feature-grid theme-purple">
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">D1</span><span class="card-title">Pie Chart توزيع المصاريف</span></div>
+      <div class="card-user">👤 "ابعتلي شارت المصاريف الشهر ده"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>يبعت صورة Pie Chart: مرتبات 36% · إيجار 20% · استراس 14% · كهرباء 8% · باقي</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">D2</span><span class="card-title">Bar Chart إيرادات vs مصاريف</span></div>
+      <div class="card-user">📆 تلقائي كل أول الشهر</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>صورة بار شارت — الإيرادات والمصاريف شهر بشهر خلال السنة</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">D3</span><span class="card-title">جدول ديون العملاء صورة</span></div>
+      <div class="card-user">👤 "ابعتلي كشف الديون"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>صورة جدول نظيف: اسم العميل / المطلوب / المدفوع / الرصيد</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">D4</span><span class="card-title">Bar Chart أداء الخياطين</span></div>
+      <div class="card-user">👤 "ابعتلي أداء الأسبوع ده"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>صورة: كل خياط وعدد قطعه الأسبوع ده مقارنة بالأسبوع اللي فات</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">D5</span><span class="card-title">Line Chart منحنى الكاش</span></div>
+      <div class="card-user">👤 "ازاي كان الكاش الشهر ده؟"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>صورة لاين شارت: رصيد الصندوق يوم بيوم خلال الشهر</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">D6</span><span class="card-title">مقارنة شهور السنة</span></div>
+      <div class="card-user">📆 تلقائي كل ربع سنة</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>صورة مقارنة الأشهر: ربحية كل شهر — الأخضر ربح، الأحمر خسارة</div>
+    </div>
+  </div>
+
+  <!-- E: Operations -->
+  <div class="section-title theme-pink">
+    <div class="section-icon">⚙️</div>
+    <div>
+      <h2>E — إدارة العمل من البوت (Operations)</h2>
+      <div class="section-meta">إدخال أوامر العملاء والخياطين من تليجرام · صعوبة عالية</div>
+    </div>
+  </div>
+  <div class="feature-grid theme-pink">
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">E1</span><span class="card-title">تسجيل أمر عميل</span></div>
+      <div class="card-user">👤 "النجار طلب 200 قطعة موديل 333"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>تم تسجيل الأمر ✅ — القيمة: 2,600 دينار (200 × 13 دينار)</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">E2</span><span class="card-title">تسجيل إنتاج خياط</span></div>
+      <div class="card-user">👤 "أبو شريف خاط 180 قطعة موديل 1"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>تم التسجيل ✅ — أجرة أبو شريف: 243 دينار (180 × 1.35)</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">E3</span><span class="card-title">إصدار كشف مرتبات</span></div>
+      <div class="card-user">👤 "ابعت كشف مرتبات الأسبوع"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>صورة كشف مرتبات منسّق — اسم / عدد قطع / إجمالي أجرة / توقيع</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">E4</span><span class="card-title">تسعير صفقة</span></div>
+      <div class="card-user">👤 "احسبلي هامش ربح 200 قطعة موديل 333"</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>إيراد: 2,600 — أجور خياطة: 340 — صافي ربح: 2,190 دينار (84%)</div>
+    </div>
+  </div>
+
+  <!-- F: Multi-Client -->
+  <div class="section-title theme-teal">
+    <div class="section-icon">🏢</div>
+    <div>
+      <h2>F — دعم متعدد العملاء (Multi-Client Scale)</h2>
+      <div class="section-meta">لما المشروع يكبر · صعوبة عالية جداً · Architecture جديدة</div>
+    </div>
+  </div>
+  <div class="feature-grid theme-teal">
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">F1</span><span class="card-title">Router بـ Chat ID</span></div>
+      <div class="card-user">⚙️ كل عميل عنده Chat ID مختلف</div>
+      <div class="card-reply"><span class="reply-label">🤖 الآلية:</span>البوت يعرف مين اللي بيتكلم ويوجّه لشيته الخاص تلقائياً</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">F2</span><span class="card-title">Onboarding تلقائي</span></div>
+      <div class="card-user">👤 عميل جديد يبعت /start</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>البوت ياخد اسم المشغل ونوعه ينشئ شيت محاسبي جاهز تلقائياً</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">F3</span><span class="card-title">لوحة تحكم لمحمود</span></div>
+      <div class="card-user">📊 تقرير يومي لمحمود</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرد:</span>كام عميل سجّلوا النهارده · كام عميل مش نشطين · إجمالي الاشتراكات</div>
+    </div>
+    <div class="feature-card">
+      <div class="card-header"><span class="card-num">F4</span><span class="card-title">تذكير دفع الاشتراك</span></div>
+      <div class="card-user">⚡ كل شهر قبل انتهاء الاشتراك بـ 5 أيام</div>
+      <div class="card-reply"><span class="reply-label">🤖 الرسالة:</span>اشتراكك بينتهي بعد 5 أيام — جدّد عشان يفضل نظامك شغّال ✅</div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="section-title theme-blue" style="margin-top:60px;">
+    <div class="section-icon">🗓️</div>
+    <div>
+      <h2>خطة التنفيذ — 4 أشهر</h2>
+      <div class="section-meta">يوليو → أكتوبر 2026</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-month">يوليو 2026</div>
+      <div class="timeline-card">
+        <h3>Phase 1 + 2 — الأكثر قيمة فوراً</h3>
+        <div class="timeline-phases">
+          <div class="phase-item">
+            <span class="phase-week">Week 1-2</span>
+            <div class="phase-content">
+              <strong>Query Mode (A)</strong>
+              <ul>
+                <li>Intent Detection: سؤال ولا عملية؟</li>
+                <li>تغطية 7 أسئلة أساسية (A1–A7)</li>
+                <li>قراءة بيانات من الشيت وتنسيق الإجابة بـ Gemini</li>
+              </ul>
+              <span class="phase-tech">IF node + Sheets Read + Gemini chain</span>
+            </div>
+          </div>
+          <div class="phase-item">
+            <span class="phase-week">Week 3-4</span>
+            <div class="phase-content">
+              <strong>Scheduled Reports (B)</strong>
+              <ul>
+                <li>ملخص نهاية اليوم (B1)</li>
+                <li>تقرير ديون أسبوعي (B4)</li>
+                <li>تقرير شهري (B3)</li>
+              </ul>
+              <span class="phase-tech">Schedule Trigger + Read + Telegram Send</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-month">أغسطس 2026</div>
+      <div class="timeline-card">
+        <h3>Phase 3 + 4 — تنبيهات وصور</h3>
+        <div class="timeline-phases">
+          <div class="phase-item">
+            <span class="phase-week">Week 5-6</span>
+            <div class="phase-content">
+              <strong>Smart Alerts (C)</strong>
+              <ul>
+                <li>تنبيه الكاش (C1) + الديون القديمة (C2)</li>
+                <li>تنبيه زيادة المصاريف (C3) + عدم التسجيل (C4)</li>
+              </ul>
+              <span class="phase-tech">Schedule + Conditional + Threshold logic</span>
+            </div>
+          </div>
+          <div class="phase-item">
+            <span class="phase-week">Week 7-8</span>
+            <div class="phase-content">
+              <strong>Visual Reports (D)</strong>
+              <ul>
+                <li>Pie Chart مصاريف (D1) + Bar Chart إيرادات (D2)</li>
+                <li>جدول ديون صورة (D3)</li>
+              </ul>
+              <span class="phase-tech">QuickChart.io API + Telegram sendPhoto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-month">سبتمبر 2026</div>
+      <div class="timeline-card">
+        <h3>Phase 5 — إدارة العمل من البوت</h3>
+        <div class="timeline-phases">
+          <div class="phase-item">
+            <span class="phase-week">Week 9-10</span>
+            <div class="phase-content">
+              <strong>Operations Bot (E1, E2)</strong>
+              <ul>
+                <li>تسجيل أوامر العملاء من تليجرام</li>
+                <li>تسجيل إنتاج الخياطين يومياً</li>
+              </ul>
+              <span class="phase-tech">Multiple sheets write + routing logic</span>
+            </div>
+          </div>
+          <div class="phase-item">
+            <span class="phase-week">Week 11-12</span>
+            <div class="phase-content">
+              <strong>Payroll + Pricing (E3, E4) + Testing</strong>
+              <ul>
+                <li>كشف مرتبات أسبوعي صورة</li>
+                <li>حساب هامش ربح صفقة</li>
+                <li>Testing مع خالد وإصلاح الـ bugs</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-month">أكتوبر 2026</div>
+      <div class="timeline-card">
+        <h3>Phase 6 — Multi-Client Scale</h3>
+        <div class="timeline-phases">
+          <div class="phase-item">
+            <span class="phase-week">Week 13-16</span>
+            <div class="phase-content">
+              <strong>Multi-Client Architecture (F)</strong>
+              <ul>
+                <li>Router بـ Chat ID لكل عميل</li>
+                <li>Onboarding تلقائي لعميل جديد</li>
+                <li>لوحة تحكم لمحمود + تذكير الاشتراك</li>
+              </ul>
+              <span class="phase-tech">New architecture + DB/Sheets registry</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Priority Table -->
+  <div class="section-title theme-blue" style="margin-top:60px;">
+    <div class="section-icon">📋</div>
+    <div>
+      <h2>مصفوفة القيمة / الصعوبة</h2>
+    </div>
+  </div>
+  <div style="background:#1a202c; border:1px solid #2d3748; border-radius:12px; overflow:hidden;">
+    <table class="priority-table">
+      <thead>
+        <tr>
+          <th>الفيتشر</th>
+          <th>قيمة لخالد</th>
+          <th>صعوبة التنفيذ</th>
+          <th>الأولوية</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A — Query Mode (الأسئلة)</td>
+          <td><span class="stars">★★★★★</span></td>
+          <td><span class="diff-badge diff-med">متوسطة</span></td>
+          <td><span class="priority-badge p1">🔴 الأول</span></td>
+        </tr>
+        <tr>
+          <td>B — تقارير دورية تلقائية</td>
+          <td><span class="stars">★★★★</span></td>
+          <td><span class="diff-badge diff-easy">سهلة</span></td>
+          <td><span class="priority-badge p1">🔴 الأول</span></td>
+        </tr>
+        <tr>
+          <td>C — تنبيهات ذكية</td>
+          <td><span class="stars">★★★★★</span></td>
+          <td><span class="diff-badge diff-med">متوسطة</span></td>
+          <td><span class="priority-badge p2">🟡 الثاني</span></td>
+        </tr>
+        <tr>
+          <td>D — تقارير بصرية (Charts)</td>
+          <td><span class="stars">★★★★</span></td>
+          <td><span class="diff-badge diff-med">متوسطة</span></td>
+          <td><span class="priority-badge p2">🟡 الثاني</span></td>
+        </tr>
+        <tr>
+          <td>E — إدارة العمل من البوت</td>
+          <td><span class="stars">★★★</span></td>
+          <td><span class="diff-badge diff-hard">عالية</span></td>
+          <td><span class="priority-badge p3">🟢 الثالث</span></td>
+        </tr>
+        <tr>
+          <td>F — Multi-Client Scale</td>
+          <td><span class="stars">★★★★★</span> (للبيزنس)</td>
+          <td><span class="diff-badge diff-very-hard">عالية جداً</span></td>
+          <td><span class="priority-badge p4">🔵 الرابع</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Security Alert -->
+  <div class="alert-box">
+    <div class="alert-icon">🔐</div>
+    <div class="alert-text">
+      <h3>مشكلة أمان — لازم تتحل قبل أي فيتشر جديد</h3>
+      <p>الـ Telegram Bot Token والـ Gemini API Key مكتوبين hard-coded في الـ flow JSON في 3 أماكن مختلفة. أي حد يشوف الملف ده يقدر يستخدمهم. لازم ينتقلوا لـ n8n Credentials قبل ما تضيف أي فيتشر.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
